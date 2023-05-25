@@ -52,8 +52,14 @@ class Record {
   final String pmethod;
   final String batch;
   final String id;
+   String note ;
+   String reschedule;
 
-  Record({required this.modifiedDate,
+
+  Record({
+    required this.reschedule,
+    required this.note,
+    required this.modifiedDate,
     required this.createdDate,
     required this.createdBy,
     required this.assdAttachment,
@@ -117,6 +123,7 @@ class Record {
         'coursetype': courseType,
         'result': status,
         'signature': signature,
+        'note' : "defalst"
 
       };
 

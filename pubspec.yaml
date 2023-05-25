@@ -48,6 +48,13 @@ dependencies:
   firebase_storage: ^11.1.1
   firebase_core: ^2.10.0
   syncfusion_flutter_charts: ^21.1.41
+  flutter_slidable: ^3.0.0
+  syncfusion_flutter_datepicker: ^21.2.3
+  intl: ^0.18.1
+  easy_search_bar: ^2.5.0
+  visibility_detector: ^0.4.0+2
+  flutter_email_sender: ^5.2.0
+  mailer: ^6.0.1
 
 dev_dependencies:
   flutter_test:

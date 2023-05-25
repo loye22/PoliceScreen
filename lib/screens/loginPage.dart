@@ -42,14 +42,16 @@ class _loginPageState extends State<loginPage> {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-                color: Colors.red,
-                gradient: LinearGradient(colors: [
-                  Color.fromRGBO(56, 142, 60, 1),
-                  Color.fromRGBO(76, 175, 80, 1),
-                  Color.fromRGBO(139, 195, 74, 1),
-                ])),
+              image: DecorationImage(
+                image: AssetImage('assests/b.jpg'),
+                fit: BoxFit.cover,
+              ),
+
+               ),
             child: Container(
+
               decoration: BoxDecoration(
+
                 // borderRadius: BorderRadius.circular(30),
                 border: Border.all(color: Colors.white.withOpacity(0.13)),
                 color: Colors.grey.shade200.withOpacity(0.25),
