@@ -20,8 +20,10 @@ class sendginForm extends StatefulWidget {
   int counter = 1;
   bool f2 = true ;
   bool f3 = true ;
+  final String batchNrVarInSendingForm ;
 
-  sendginForm({super.key, required this.rec, required this.tab});
+  sendginForm({super.key, required this.rec, required this.tab , required this.batchNrVarInSendingForm});
+
 
 //  const AddDepartmantForm({Key? key}) : super(key: key);
 
@@ -95,6 +97,7 @@ class _sendginFormState extends State<sendginForm> {
 
   @override
   Widget build(BuildContext context) {
+
     dynamic statistic = countStatus(widget.rec);
 
     return SingleChildScrollView(
@@ -416,7 +419,7 @@ class _sendginFormState extends State<sendginForm> {
                                           .ref()
                                           .child('signatures')
                                           .child('mySignature' +
-                                          timestamp +
+                                            timestamp +
                                           '.png');
                                       await storageRef
                                           .putData(signatureBytes!);
@@ -535,7 +538,8 @@ class _sendginFormState extends State<sendginForm> {
                                             '404notfound',
                                         'weight':
                                         record.weight ?? '',
-                                        'note': record.note ?? ''
+                                        'note': record.note ?? '' ,
+                                        'className' : record.className
                                       });
                                     }
 
@@ -544,15 +548,23 @@ class _sendginFormState extends State<sendginForm> {
                                     return;
                                   }
 
+                                  // this line to check if this collection with batch nr is exesit or not
+                                  // true ==> the doc already uploded
+                                  // false ==>
+                                  final condition = await checkCollectionExists('49','renew');
+
+
+                                  return ;
+                                  if(condition){
+                                    MyDialog.showAlert(context,'هذه الدفعة موجودة بالفعل في النظام , يرجى التاكد من التبويب جديد او تجديد و المجاولة من جديد') ;
+                                    return;
+
+                                  }
 
                                   // handle the new and renew gards
                                   CollectionReference
                                   collectionRef =
-                                  FirebaseFirestore.instance
-                                      .collection(
-                                    // this is list of the patch nr where we fetching
-                                      '46')
-                                      .doc()
+                                  FirebaseFirestore.instance.collection('result').doc(widget.batchNrVarInSendingForm)
                                       .collection(
                                       widget.tab == 0
                                           ? "new"
@@ -594,6 +606,7 @@ class _sendginFormState extends State<sendginForm> {
                                       'rank2' : rankController2.text ,
                                       'name3' : nameController3.text ,
                                       'rank3' : rankController3.text ,
+                                      'className' :record.className
                                     });
                                   }
 
@@ -1244,6 +1257,55 @@ class _sendginFormState extends State<sendginForm> {
       print('Error sending records: $e');
     }
   }
+/*
+  Future<bool> checkCollectionExists(String batchNumber, String collectionName) async {
+    /*
+    In this updated function, we retrieve the specific batch document based on the provided batch number.
+    Then, we check if the document exists. If it doesn't exist, we return false indicating that the batch doesn't exist.
+    If the batch document exists, we check if the document data contains the specified collection name as a key.
+    If the collection name doesn't exist within the batch, we also return false.
+    If the batch document exists and the collection name exists within the batch,
+    we return true indicating that the collection exists within the specified batch.
+    */
+
+    final firestore = FirebaseFirestore.instance;
+    final resultCollection = firestore.collection('result');
+    final batchDoc = await resultCollection.doc(batchNumber.toString()).get();
+
+
+    if (!batchDoc.exists) {
+      // Batch document doesn't exist
+      print('batch condition');
+      return false;
+    }
+    final batchData = batchDoc.data();
+    if ( !batchData!.containsKey(collectionName)) {
+      // Collection doesn't exist within the batch
+      print('2nd contions');
+      return false;
+    }
+    // if this function returned true send feedback that this batch already uploaded
+    return true;
+  }
+*/
+
+
+
+
+
+  Future<bool> checkCollectionExists(String batchNumber, String collectionName) async {
+    final CollectionReference collectionReference = FirebaseFirestore.instance
+        .collection('result')
+        .doc(batchNumber)
+        .collection(collectionName);
+
+    final QuerySnapshot querySnapshot = await collectionReference.get();
+    print(querySnapshot.docs.isNotEmpty);
+    return querySnapshot.docs.isNotEmpty;
+
+
+  }
+
 
   Future<List<String>> getPatchNr() async {
     String url =

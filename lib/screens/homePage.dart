@@ -30,7 +30,6 @@ import 'dart:ui' as ui;
 class homePage extends StatefulWidget {
   static const routeName = '/homePage';
 
-
   homePage({Key? key}) : super(key: key);
 
   @override
@@ -45,6 +44,7 @@ class _homePageState extends State<homePage>
   String startDate = "20/20/2020";
   String endDate = "20/20/2030";
   String instructorName = "Nitro";
+  String batchNrVar = '45';
   List<Map<String, dynamic>> data = [
     {
       "Name": "John",
@@ -184,10 +184,10 @@ class _homePageState extends State<homePage>
   List<dynamic> reNewGardsList = [];
   List<dynamic> reScedualGardsList = [];
   Map<String, dynamic> companyDic = {};
+  Map <String,String> classDic = {} ;
   final _scrollController = ScrollController();
   bool sFeacher = false;
-  String batchNr ='';
-
+  String batchNr = '';
 
   // create controller
 
@@ -249,12 +249,17 @@ class _homePageState extends State<homePage>
               return Container(
                 width: double.infinity,
                 height: double.infinity,
-                decoration: BoxDecoration( image: DecorationImage(
-                  image: AssetImage('assests/b.jpg'),
-                  fit: BoxFit.cover,
-                ),),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assests/b.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 child: Container(
-                  child: Center(child: CircularProgressIndicator(color: Colors.white,)),
+                  child: Center(
+                      child: CircularProgressIndicator(
+                    color: Colors.white,
+                  )),
                   decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Colors.white.withOpacity(0.13)),
@@ -279,13 +284,11 @@ class _homePageState extends State<homePage>
                     Container(
                       width: double.infinity,
                       height: double.infinity,
-
                       decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assests/b.jpg'),
-                            fit: BoxFit.cover,
-                          ),
-
+                        image: DecorationImage(
+                          image: AssetImage('assests/b.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       child: Container(
                         decoration: BoxDecoration(
@@ -303,7 +306,7 @@ class _homePageState extends State<homePage>
                         child: DefaultTabController(
                           length: 2,
                           child: Animate(
-                            effects: [FadeEffect(),SlideEffect()],
+                            effects: [FadeEffect(), SlideEffect()],
                             child: Container(
                                 width: screenSize.width - 100,
                                 height: screenSize.height - 200,
@@ -351,7 +354,6 @@ class _homePageState extends State<homePage>
                                               scrollController:
                                                   _scrollController,
                                               dataRowHeight: 120,
-
                                               columns: [
                                                 DataColumn2(
                                                     label: Text(
@@ -451,8 +453,9 @@ class _homePageState extends State<homePage>
                                                                           setState) =>
                                                                   DropdownButton<
                                                                       String>(
-                                                                    isExpanded: true,
-                                                                    isDense: true,
+                                                                isExpanded:
+                                                                    true,
+                                                                isDense: true,
                                                                 value:
                                                                     item.status,
                                                                 //item.status ,
@@ -600,9 +603,11 @@ class _homePageState extends State<homePage>
                                                                           context,
                                                                       StateSetter
                                                                           setState) =>
-                                                                  DropdownButton<String>(
-                                                                    isDense: true,
-                                                                isExpanded: true,
+                                                                  DropdownButton<
+                                                                      String>(
+                                                                isDense: true,
+                                                                isExpanded:
+                                                                    true,
 
                                                                 value:
                                                                     item.status,
@@ -625,7 +630,6 @@ class _homePageState extends State<homePage>
                                                                     value) {
                                                                   return DropdownMenuItem<
                                                                       String>(
-
                                                                     value:
                                                                         value,
                                                                     child: Text(
@@ -656,8 +660,6 @@ class _homePageState extends State<homePage>
                                                                             content: AddNoteForm(
                                                                               callBack: (x) {
                                                                                 item.note = x;
-
-
                                                                               },
                                                                             )),
                                                                   );
@@ -689,7 +691,6 @@ class _homePageState extends State<homePage>
                                                                           date =
                                                                           DateFormat('yyyy-MM-dd')
                                                                               .format(d);
-
 
                                                                       await addRecordToFirebase(
                                                                           item,
@@ -814,7 +815,8 @@ class _homePageState extends State<homePage>
                                                                           setState) =>
                                                                   DropdownButton<
                                                                       String>(
-                                                                    isExpanded: true,
+                                                                isExpanded:
+                                                                    true,
                                                                 isDense: true,
                                                                 value:
                                                                     item.status,
@@ -916,55 +918,57 @@ class _homePageState extends State<homePage>
                                                   : this
                                                       .reNewGardsList
                                                       .map(
-                                                    (item) =>
-                                                    DataRow2(cells: [
-                                                      DataCell(Text(
-                                                        item.nameEn,
-                                                        style: TextStyle(
-                                                            fontSize: 20),
-                                                      )),
-                                                      DataCell(Text(
-                                                        item.nationality,
-                                                        style: TextStyle(
-                                                            fontSize: 20),
-                                                      )),
-                                                      DataCell(Text(
-                                                        item.company,
-                                                        style: TextStyle(
-                                                            fontSize: 18),
-                                                      )),
-                                                      DataCell(Text(
-                                                        item.course,
-                                                        style: TextStyle(
-                                                            fontSize: 20),
-                                                      )),
-                                                      DataCell(Text(
-                                                        item.height,
-                                                        style: TextStyle(
-                                                            fontSize: 25),
-                                                      )),
-                                                      DataCell(Text(
-                                                        item.weight,
-                                                        style: TextStyle(
-                                                            fontSize: 25,
-                                                            color: Colors
-                                                                .black),
-                                                      )),
-                                                      DataCell(
-                                                        StatefulBuilder(
-                                                          builder: (BuildContext
-                                                          context,
-                                                              StateSetter
-                                                              setState) =>
-                                                              DropdownButton<String>(
+                                                        (item) =>
+                                                            DataRow2(cells: [
+                                                          DataCell(Text(
+                                                            item.nameEn,
+                                                            style: TextStyle(
+                                                                fontSize: 20),
+                                                          )),
+                                                          DataCell(Text(
+                                                            item.nationality,
+                                                            style: TextStyle(
+                                                                fontSize: 20),
+                                                          )),
+                                                          DataCell(Text(
+                                                            item.company,
+                                                            style: TextStyle(
+                                                                fontSize: 18),
+                                                          )),
+                                                          DataCell(Text(
+                                                            item.course,
+                                                            style: TextStyle(
+                                                                fontSize: 20),
+                                                          )),
+                                                          DataCell(Text(
+                                                            item.height,
+                                                            style: TextStyle(
+                                                                fontSize: 25),
+                                                          )),
+                                                          DataCell(Text(
+                                                            item.weight,
+                                                            style: TextStyle(
+                                                                fontSize: 25,
+                                                                color: Colors
+                                                                    .black),
+                                                          )),
+                                                          DataCell(
+                                                            StatefulBuilder(
+                                                              builder: (BuildContext
+                                                                          context,
+                                                                      StateSetter
+                                                                          setState) =>
+                                                                  DropdownButton<
+                                                                      String>(
                                                                 isDense: true,
-                                                                isExpanded: true,
+                                                                isExpanded:
+                                                                    true,
 
                                                                 value:
-                                                                item.status,
+                                                                    item.status,
                                                                 //item.status ,
                                                                 onChanged: (String?
-                                                                newValue) {
+                                                                    newValue) {
                                                                   setState(() {
                                                                     item.status =
                                                                         newValue;
@@ -978,92 +982,88 @@ class _homePageState extends State<homePage>
                                                                 ].map<
                                                                     DropdownMenuItem<
                                                                         String>>((String
-                                                                value) {
+                                                                    value) {
                                                                   return DropdownMenuItem<
                                                                       String>(
-
                                                                     value:
-                                                                    value,
+                                                                        value,
                                                                     child: Text(
                                                                       value,
                                                                       style: TextStyle(
                                                                           fontSize:
-                                                                          22),
+                                                                              22),
                                                                     ),
                                                                   );
                                                                 }).toList(),
                                                               ),
-                                                        ),
-                                                      ),
-                                                      DataCell(Row(
-                                                        children: [
-                                                          IconButton(
-                                                            onPressed:
-                                                                () async {
-                                                              dynamic x =
-                                                              await showDialog(
-                                                                context:
-                                                                context,
-                                                                builder: (BuildContext
-                                                                context) =>
-                                                                    AlertDialog(
-                                                                        backgroundColor:
-                                                                        Colors.transparent,
-                                                                        content: AddNoteForm(
-                                                                          callBack: (x) {
-                                                                            item.note = x;
-
-
-                                                                          },
-                                                                        )),
-                                                              );
-                                                            },
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .note_add_outlined,
-                                                              size: 30,
                                                             ),
                                                           ),
-                                                          //SizedBox(width: 5,),
-                                                          IconButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                bool b =
-                                                                false;
-                                                                await MyAlertDialog.showConfirmationDialog(
-                                                                    context,
-                                                                    'هل تريد حقا اعادة جدولة هذا الحارس ',
+                                                          DataCell(Row(
+                                                            children: [
+                                                              IconButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  dynamic x =
+                                                                      await showDialog(
+                                                                    context:
+                                                                        context,
+                                                                    builder: (BuildContext
+                                                                            context) =>
+                                                                        AlertDialog(
+                                                                            backgroundColor:
+                                                                                Colors.transparent,
+                                                                            content: AddNoteForm(
+                                                                              callBack: (x) {
+                                                                                item.note = x;
+                                                                              },
+                                                                            )),
+                                                                  );
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .note_add_outlined,
+                                                                  size: 30,
+                                                                ),
+                                                              ),
+                                                              //SizedBox(width: 5,),
+                                                              IconButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    bool b =
+                                                                        false;
+                                                                    await MyAlertDialog.showConfirmationDialog(
+                                                                        context,
+                                                                        'هل تريد حقا اعادة جدولة هذا الحارس ',
                                                                         () async {
                                                                       b = true;
                                                                     }, () {});
-                                                                if (b) {
-                                                                  DateTime
-                                                                  d =
-                                                                  await _selectDate(
-                                                                      context);
-                                                                  String
-                                                                  date =
-                                                                  DateFormat('yyyy-MM-dd')
-                                                                      .format(d);
+                                                                    if (b) {
+                                                                      DateTime
+                                                                          d =
+                                                                          await _selectDate(
+                                                                              context);
+                                                                      String
+                                                                          date =
+                                                                          DateFormat('yyyy-MM-dd')
+                                                                              .format(d);
 
-
-                                                                  await addRecordToFirebase(
-                                                                      item,
-                                                                      date,
-                                                                      item.note
-                                                                          .toString());
-                                                                }
-                                                              },
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .schedule_outlined,
-                                                                size: 30,
-                                                              )),
-                                                        ],
-                                                      )),
-                                                    ]),
-                                              )
-                                                  .toList(),
+                                                                      await addRecordToFirebase(
+                                                                          item,
+                                                                          date,
+                                                                          item.note
+                                                                              .toString());
+                                                                    }
+                                                                  },
+                                                                  icon: Icon(
+                                                                    Icons
+                                                                        .schedule_outlined,
+                                                                    size: 30,
+                                                                  )),
+                                                            ],
+                                                          )),
+                                                        ]),
+                                                      )
+                                                      .toList(),
 
                                               /*map(
                                                         (item) =>
@@ -1323,7 +1323,8 @@ class _homePageState extends State<homePage>
                                                                               .transparent,
                                                                           content:
                                                                               AddNoteForm(
-                                                                            callBack: (x) {
+                                                                            callBack:
+                                                                                (x) {
                                                                               item.note = x;
                                                                             },
                                                                           )),
@@ -1342,8 +1343,9 @@ class _homePageState extends State<homePage>
                                                                           setState) =>
                                                                   DropdownButton<
                                                                       String>(
-                                                                    isExpanded: true,
-                                                                    isDense: true,
+                                                                isExpanded:
+                                                                    true,
+                                                                isDense: true,
                                                                 value:
                                                                     item.status,
                                                                 //item.status ,
@@ -1365,7 +1367,6 @@ class _homePageState extends State<homePage>
                                                                     value) {
                                                                   return DropdownMenuItem<
                                                                       String>(
-
                                                                     value:
                                                                         value,
                                                                     child: Text(
@@ -1458,8 +1459,9 @@ class _homePageState extends State<homePage>
                                                                           setState) =>
                                                                   DropdownButton<
                                                                       String>(
-                                                                    isExpanded: true,
-                                                                    isDense: true,
+                                                                isExpanded:
+                                                                    true,
+                                                                isDense: true,
                                                                 value:
                                                                     item.status,
                                                                 //item.status ,
@@ -1511,7 +1513,7 @@ class _homePageState extends State<homePage>
                       ),
                     ),
                     Animate(
-                      effects: [FadeEffect(),SlideEffect(begin:Offset(0,0) )],
+                      effects: [FadeEffect(), SlideEffect(begin: Offset(0, 0))],
                       child: Positioned(
                         top: 100,
                         //MediaQuery.of(context).size.height - 150,
@@ -1605,36 +1607,41 @@ class _homePageState extends State<homePage>
                                         context: context,
                                         builder: (BuildContext context) {
                                           if (_tabController.index == 2) {
-                                           // print("debug");
+                                            // print("debug");
 
-                                            if(!reScedualGardsList.isEmpty)
+                                            if (!reScedualGardsList.isEmpty)
+                                              return AlertDialog(
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  content: sendginForm(
+                                                    batchNrVarInSendingForm: batchNrVar,
+                                                      tab: 2,
+                                                      rec: this
+                                                          .reScedualGardsList));
+
                                             return AlertDialog(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                content: sendginForm(
-                                                    tab: 2,
-                                                    rec: this
-                                                        .reScedualGardsList));
-
-                                             return AlertDialog(
-                                               title: Text('تنبيه'),
-                                               content: Text('لا يوجد حراس ضمن اعادة الجدولة'),
-                                               actions: <Widget>[
-                                                 TextButton(
-                                                   child: Text('OK' , style: TextStyle(color: Colors.black),),
-                                                   onPressed: () {
-                                                     Navigator.of(context).pop();
-                                                   },
-                                                 ),
-                                               ],
-                                             );
-
-
+                                              title: Text('تنبيه'),
+                                              content: Text(
+                                                  'لا يوجد حراس ضمن اعادة الجدولة'),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  child: Text(
+                                                    'OK',
+                                                    style: TextStyle(
+                                                        color: Colors.black),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                ),
+                                              ],
+                                            );
                                           } else {
                                             return AlertDialog(
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 content: sendginForm(
+                                                  batchNrVarInSendingForm: batchNrVar,
                                                     tab: _tabController.index,
                                                     rec: _tabController.index ==
                                                             0
@@ -1645,6 +1652,49 @@ class _homePageState extends State<homePage>
                                   },
                                 ),
                               ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Container(
+                                  height: 55,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(10)),
+
+                                      //  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                                      color: Colors.grey.shade200
+                                          .withOpacity(0.45)),
+                                  child: DropdownButtonFormField<String>(
+                                   decoration: InputDecoration(
+                                     enabledBorder: InputBorder.none,
+                                    prefixText: '            Batch Nr:  ',
+
+                                   ),
+
+                                    value: batchNrVar,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        this.newGardsList = [] ;
+                                        batchNrVar = newValue!;
+                                      });
+                                    },
+                                    items: MyData.myList
+                                        .map((e) => DropdownMenuItem<String>(
+                                              value: e.toString(),
+                                              child: Text(e.toString()),
+                                            ))
+                                        .toList(),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16.0,
+                                    ),
+                                    dropdownColor: Colors.grey[200],
+                                    icon: Icon(Icons.arrow_drop_down),
+                                    isExpanded: true,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -1652,15 +1702,12 @@ class _homePageState extends State<homePage>
                     ),
                     Positioned(
                       top: 100,
-                      child: IconButton(icon: Icon(Icons.add),onPressed: () async {
-                        // Get the screen size and resolution
-                
-
-
-
-
-                      }) , )
-
+                      child: IconButton(
+                          icon: Icon(Icons.add),
+                          onPressed: () async {
+                            // Get the screen size and resolution
+                          }),
+                    )
                   ],
                 );
               });
@@ -1720,15 +1767,14 @@ class _homePageState extends State<homePage>
   }
 
   // fetaching gards new
-  Future<List> fetchRecordsNewGards() async {
+  Future<List> fetchRecordsNewGards(String BatchNr) async {
     List<String> patchNr = await getPatchNr();
-    String url =
-        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${patchNr[0]}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
+    String url = '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
     final response =
         await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body)["response"];
-     // print(data[0]["results"]["batch"] ?? '404');
+      // print(data[0]["results"]["batch"] ?? '404');
 
       final List<dynamic> records = data["results"]
           .map((item) => Record(
@@ -1739,7 +1785,7 @@ class _homePageState extends State<homePage>
               assdAttachment: item["passport attachment"] ?? '',
               assdExpiry: item["passport expiry"] ?? '',
               assdNumber: item["passport number"] ?? '',
-              className: item["Class"] ?? '',
+              className:  this.classDic[item["Class"]]?? '4 04notfound' ,  //item["Class"] ?? '',
               company: this.companyDic[item["company"]] ?? '',
               course: item["course"] ?? '',
               courseType: item["course-type"] ?? '',
@@ -1785,19 +1831,22 @@ class _homePageState extends State<homePage>
               note: item['note'] ?? ''))
           .toList();
 
-      batchNr =  records[0].batch.toString() ?? '' ;
+      batchNr = records[0].batch.toString() ?? '';
       MyData.data = batchNr;
       this.newGardsList = records;
+      print(this.newGardsList.length);
+
+
       return records;
     } else {
       throw Exception('Failed to load records');
     }
   }
 
-  Future<List> fetchRecordsReNewGards() async {
+  Future<List> fetchRecordsReNewGards(String BatchNr) async {
     List<String> patchNr = await getPatchNr();
     String url =
-        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${patchNr[0]}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
+        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
     final response =
         await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
     if (response.statusCode == 200) {
@@ -1811,7 +1860,7 @@ class _homePageState extends State<homePage>
               assdAttachment: item["passport attachment"] ?? '',
               assdExpiry: item["passport expiry"] ?? '',
               assdNumber: item["passport number"] ?? '',
-              className: item["Class"] ?? '',
+              className:  this.classDic[item["Class"]] ?? '',
               company: this.companyDic[item["company"]] ?? '',
               course: item["course"] ?? '',
               courseType: item["course-type"] ?? '',
@@ -1881,7 +1930,6 @@ class _homePageState extends State<homePage>
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         String redate = data['redate'] ?? 'notFound404';
         data = data['gard'];
-
 
         // Create a Record object from the data
         Record record = Record(
@@ -1953,36 +2001,48 @@ class _homePageState extends State<homePage>
     try {
       if (this.newGardsList.isEmpty) {
         this.companyDic = await getCompanyData() as Map<String, dynamic>;
-        await fetchRecordsNewGards();
-        await fetchRecordsReNewGards();
+        await fetchOngoingClasses();
+        await fetchRecordsNewGards(batchNrVar);
+        await fetchRecordsReNewGards(batchNrVar);
         await fetchRecordsReScedualGards();
+
         List<String> patchNrsList = await getPatchNr();
-        MyData.myList =  Set<String>.from(patchNrsList).toList();
+        MyData.myList = Set<String>.from(patchNrsList).toList();
 
 
 
         // await getExcludedEmployeeIds();
       } else {
         print('already loaded');
+
+
       }
     } catch (e) {
       print(e);
     }
   }
 
-/*
+  Future<Map<String, String>> fetchOngoingClasses() async {
+    final url = 'https://www.tsti.ae/version-live/api/1.1/obj/classes/?constraints=[ { \"key\": \"Status\", \"constraint_type\": \"equals\", \"value\": \"Ongoing\" }]';
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+      final classes = jsonData['response']['results'];
+      final classMap = Map<String, String>();
+      for (var classData in classes) {
+        final id = classData['_id'];
+        final title = classData['title'];
+        classMap[id] = title;
+      }
+      this.classDic = classMap ;
+      return classMap;
+    } else {
 
-  Future<String?> getDepartmentTitle(String docId) async {
-    final docSnapshot = await FirebaseFirestore.instance
-        .collection('Departments')
-        .doc(docId)
-        .get();
-    final title = docSnapshot.data()?['title'];
-    return title;
+      throw Exception('Failed to fetch ongoing classes');
+    }
   }
 
 
- */
 
   List<dynamic> searchByName(List<dynamic> records, String name) {
     if (name.isEmpty) {
@@ -2078,6 +2138,7 @@ class _homePageState extends State<homePage>
       print('Error adding record: $e');
     }
   }
+
 }
 
 void doNothing(BuildContext context) {}
@@ -2100,7 +2161,9 @@ Future<void> createDocumentWithId(String documentId) async {
     // Add more fields and their values as needed
   };
 
-  docRef.set(data)
-      .then((value) => print('Document created successfully with ID: $documentId'))
+  docRef
+      .set(data)
+      .then((value) =>
+          print('Document created successfully with ID: $documentId'))
       .catchError((error) => print('Failed to create document: $error'));
 }

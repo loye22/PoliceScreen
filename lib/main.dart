@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tsti_signature/models/MyDialog.dart';
 import 'package:tsti_signature/screens/create_signature.dart';
 import 'package:tsti_signature/screens/homePage.dart';
 import 'package:tsti_signature/screens/loginPage.dart';
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasData) {
+            //  print(snapshot.data.uid);
+            //Provider.of<AuthProvider>(context, listen: false).setUid(snapshot.data.uid);
+            //  global.set(snapshot.data.uid);
             return homePage();
           } else {
             return loginPage();
@@ -40,9 +44,13 @@ class MyApp extends StatelessWidget {
         },
 
       ),
+
+
+
+
       routes: {
         homePage.routeName: (ctx) => homePage(),
-        sendginForm.routeName: (ctx) => sendginForm(rec: [] , tab: 0),
+        sendginForm.routeName: (ctx) => sendginForm(rec: [] , tab: 0 , batchNrVarInSendingForm: ''),
         loginPage.routeName: (ctx) => loginPage(),
       },
     );

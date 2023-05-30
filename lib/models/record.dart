@@ -123,9 +123,12 @@ class Record {
         'coursetype': courseType,
         'result': status,
         'signature': signature,
-        'note' : "defalst"
+        'note' : "defalst",
+        'className':this.className
 
       };
+
+
 
 
 
