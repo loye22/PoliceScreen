@@ -551,10 +551,13 @@ class _sendginFormState extends State<sendginForm> {
                                   // this line to check if this collection with batch nr is exesit or not
                                   // true ==> the doc already uploded
                                   // false ==>
-                                  final condition = await checkCollectionExists('49','renew');
+                                  final condition = await checkCollectionExists(widget.batchNrVarInSendingForm, widget.tab == 0
+                                      ? "new"
+                                      : "renew");
+                                  print(widget.rec.length);
 
 
-                                  return ;
+
                                   if(condition){
                                     MyDialog.showAlert(context,'هذه الدفعة موجودة بالفعل في النظام , يرجى التاكد من التبويب جديد او تجديد و المجاولة من جديد') ;
                                     return;
