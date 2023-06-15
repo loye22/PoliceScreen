@@ -44,7 +44,7 @@ class _homePageState extends State<homePage>
   String startDate = "20/20/2020";
   String endDate = "20/20/2030";
   String instructorName = "Nitro";
-  String batchNrVar = '40';
+  String batchNrVar = '51';
   List<Map<String, dynamic>> data = [
     {
       "Name": "John",
@@ -1786,7 +1786,7 @@ class _homePageState extends State<homePage>
           assdAttachment: item["passport attachment"] ?? '',
           assdExpiry: item["passport expiry"] ?? '',
           assdNumber: item["passport number"] ?? '',
-          className:  this.classDic[item["Class"]]?? item["Class"],  //item["Class"] ?? '',
+          className:  item["Class"]?? 'not found',  //item["Class"] ?? '',
           company: this.companyDic[item["company"]] ?? '',
           course: item["course"] ?? '',
           courseType: item["course-type"] ?? '',
@@ -1845,7 +1845,7 @@ class _homePageState extends State<homePage>
             assdAttachment: item["passport attachment"] ?? '',
             assdExpiry: item["passport expiry"] ?? '',
             assdNumber: item["passport number"] ?? '',
-            className:  this.classDic[item["Class"]]?? item["Class"] ,  //item["Class"] ?? '',
+            className:  item["Class"]?? 'not found' ,  //item["Class"] ?? '',
             company: this.companyDic[item["company"]] ?? '',
             course: item["course"] ?? '',
             courseType: item["course-type"] ?? '',
@@ -1922,7 +1922,7 @@ class _homePageState extends State<homePage>
           assdAttachment: item["passport attachment"] ?? '',
           assdExpiry: item["passport expiry"] ?? '',
           assdNumber: item["passport number"] ?? '',
-          className:  this.classDic[item["Class"]] ?? item["Class"],
+          className:  item["Class"]?? 'not found',
           company: this.companyDic[item["company"]] ?? '',
           course: item["course"] ?? '',
           courseType: item["course-type"] ?? '',
@@ -1982,7 +1982,7 @@ class _homePageState extends State<homePage>
             assdAttachment: item["passport attachment"] ?? '',
             assdExpiry: item["passport expiry"] ?? '',
             assdNumber: item["passport number"] ?? '',
-            className:  this.classDic[item["Class"]]??item["Class"] ,  //item["Class"] ?? '',
+            className:  item["Class"]??'not found' ,  //item["Class"] ?? '',
             company: this.companyDic[item["company"]] ?? '',
             course: item["course"] ?? '',
             courseType: item["course-type"] ?? '',
@@ -2066,7 +2066,7 @@ class _homePageState extends State<homePage>
             assdAttachment: data["passport attachment"] ?? '',
             assdExpiry: data["passport expiry"] ?? '',
             assdNumber: data["passport number"] ?? '',
-            className: data["Class"] ?? '',
+            className: data["Class"] ??'not found',
             company: data["company"] ?? '',
             course: data["course"] ?? '',
             courseType: data["coursetype"] ?? '',
@@ -2123,23 +2123,17 @@ class _homePageState extends State<homePage>
     return dataList;
   }
 
+
   Future<void> initt() async {
     try {
       if (this.newGardsList.isEmpty) {
         this.companyDic = await getCompanyData() as Map<String, dynamic>;
         List<String> patchNrsList = await getPatchNr();
         MyData.myList = Set<String>.from(patchNrsList).toList();
-        this.batchNrVar = Set<String>.from(patchNrsList).toList()[0];
-
         await fetchOngoingClasses();
         await fetchRecordsNewGards(batchNrVar);
         await fetchRecordsReNewGards(batchNrVar);
         await fetchRecordsReScedualGards();
-
-
-
-
-
         // await getExcludedEmployeeIds();
       } else {
         print('already loaded');
