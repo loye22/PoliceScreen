@@ -4,20 +4,11 @@ class MyData {
 
 
 
-
   static List<String> get myList => _myList;
 
   static set myList(List<String> newList) {
     _myList = newList;
-
   }
-
-
-
-
-
-
-
 
 
   static set data(String value) {

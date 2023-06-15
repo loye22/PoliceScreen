@@ -24,9 +24,8 @@ import '../models/PopupUtils.dart';
 import '../models/record.dart';
 import '../models/staticData.dart';
 import '../widgets/button.dart';
-import 'dart:ui' as ui;
-
 import '../widgets/searchBar.dart';
+import 'dart:ui' as ui;
 
 class homePage extends StatefulWidget {
   static const routeName = '/homePage';
@@ -185,8 +184,7 @@ class _homePageState extends State<homePage>
   List<dynamic> reNewGardsList = [];
   List<dynamic> reScedualGardsList = [];
   Map<String, dynamic> companyDic = {};
-  Map<String, String> classDic = {};
-
+  Map <String,String> classDic = {} ;
   final _scrollController = ScrollController();
   bool sFeacher = false;
   String batchNr = '';
@@ -260,8 +258,8 @@ class _homePageState extends State<homePage>
                 child: Container(
                   child: Center(
                       child: CircularProgressIndicator(
-                    color: Colors.white,
-                  )),
+                        color: Colors.white,
+                      )),
                   decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(30),
                     border: Border.all(color: Colors.white.withOpacity(0.13)),
@@ -277,745 +275,596 @@ class _homePageState extends State<homePage>
                   child:TextField()
                 ),
               );*/
-                  LayoutBuilder(builder:
-                      (BuildContext context, BoxConstraints constraints) {
-                var screenSize =
-                    constraints.biggest; // Initialize the screen size
-                return Stack(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assests/b.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
+                LayoutBuilder(builder:
+                    (BuildContext context, BoxConstraints constraints) {
+                  var screenSize =
+                      constraints.biggest; // Initialize the screen size
+                  return Stack(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: double.infinity,
                         decoration: BoxDecoration(
-                          // borderRadius: BorderRadius.circular(30),
-                          border:
-                              Border.all(color: Colors.white.withOpacity(0.13)),
-                          color: Colors.grey.shade200.withOpacity(0.35),
+                          image: DecorationImage(
+                            image: AssetImage('assests/b.jpg'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            // borderRadius: BorderRadius.circular(30),
+                            border:
+                            Border.all(color: Colors.white.withOpacity(0.13)),
+                            color: Colors.grey.shade200.withOpacity(0.35),
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 190,
-                      right: 50,
-                      child: SingleChildScrollView(
-                        child: DefaultTabController(
-                          length: 2,
-                          child: Animate(
-                            effects: [FadeEffect(), SlideEffect()],
-                            child: Container(
-                                width: screenSize.width - 100,
-                                height: screenSize.height - 200,
-                                //MediaQuery.of(context).size.height - 200,
-                                padding: EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10)),
-                                  border: Border.all(
-                                      color: Colors.white.withOpacity(0.13)),
-                                  color: Colors.grey.shade200.withOpacity(0.3),
-                                ),
-                                child: Column(
-                                  children: [
-                                    TabBar(
-                                      controller: _tabController,
-                                      indicatorColor: Colors.blue,
-                                      labelColor: Colors.blue,
-                                      unselectedLabelColor: Colors.black,
-                                      tabs: [
-                                        Tab(
-                                            child: Text(
-                                          'جديد ',
-                                          style: TextStyle(fontSize: 24),
-                                        )),
-                                        Tab(
-                                            child: Text(
-                                          'تجديد',
-                                          style: TextStyle(fontSize: 24),
-                                        )),
-                                        Tab(
-                                            child: Text(
-                                          'الحراس المعاد جدولتهم',
-                                          style: TextStyle(fontSize: 24),
-                                        )),
-                                      ],
-                                    ),
-                                    Expanded(
-                                      child: TabBarView(
+                      Positioned(
+                        top: 190,
+                        right: 50,
+                        child: SingleChildScrollView(
+                          child: DefaultTabController(
+                            length: 2,
+                            child: Animate(
+                              effects: [FadeEffect(), SlideEffect()],
+                              child: Container(
+                                  width: screenSize.width - 100,
+                                  height: screenSize.height - 200,
+                                  //MediaQuery.of(context).size.height - 200,
+                                  padding: EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(10)),
+                                    border: Border.all(
+                                        color: Colors.white.withOpacity(0.13)),
+                                    color: Colors.grey.shade200.withOpacity(0.3),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      TabBar(
                                         controller: _tabController,
-                                        children: [
-                                          // Personal Tab
-                                          Center(
-                                            child: DataTable2(
-                                              scrollController:
-                                                  _scrollController,
-                                              dataRowHeight: 120,
-                                              columns: [
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الاسم",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الجنسية",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الشركة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "اسم الكورس",
-                                                  style:
-                                                      TextStyle(fontSize: 22),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الطول",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الوزن",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "النتيجة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "خيارات",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                              ],
-                                              rows: sFeacher
-                                                  ? this
-                                                      .searchByName(
-                                                          this.newGardsList,
-                                                          searchController.text
-                                                              .toString())
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.company,
-                                                            style: TextStyle(
-                                                                fontSize: 18),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                isDense: true,
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
+                                        indicatorColor: Colors.blue,
+                                        labelColor: Colors.blue,
+                                        unselectedLabelColor: Colors.black,
+                                        tabs: [
+                                          Tab(
+                                              child: Text(
+                                                'جديد ',
+                                                style: TextStyle(fontSize: 24),
+                                              )),
+                                          Tab(
+                                              child: Text(
+                                                'تجديد',
+                                                style: TextStyle(fontSize: 24),
+                                              )),
+                                          Tab(
+                                              child: Text(
+                                                'الحراس المعاد جدولتهم',
+                                                style: TextStyle(fontSize: 24),
+                                              )),
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: TabBarView(
+                                          controller: _tabController,
+                                          children: [
+                                            // Personal Tab
+                                            Center(
+                                              child: DataTable2(
+                                                scrollController:
+                                                _scrollController,
+                                                dataRowHeight: 120,
+                                                columns: [
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الاسم",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الجنسية",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الشركة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "اسم الكورس",
+                                                        style:
+                                                        TextStyle(fontSize: 22),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الطول",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الوزن",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "النتيجة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "خيارات",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                ],
+                                                rows: sFeacher
+                                                    ? this
+                                                    .searchByName(
+                                                    this.newGardsList,
+                                                    searchController.text
+                                                        .toString())
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.company,
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isExpanded:
+                                                                  true,
+                                                                  isDense: true,
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
+                                                                  },
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
                                                                       value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              25),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          DataCell(Row(
-                                                            children: [
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    print(
-                                                                        'zzz');
-                                                                    dynamic x =
-                                                                        await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder: (BuildContext
-                                                                              context) =>
-                                                                          AlertDialog(
-                                                                              backgroundColor: Colors.transparent,
-                                                                              content: AddNoteForm(
-                                                                                callBack: (x) {
-                                                                                  item.note = x;
-                                                                                },
-                                                                              )),
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            25),
+                                                                      ),
                                                                     );
-                                                                    print(item +
-                                                                        "item<<<<<");
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .note_add_outlined,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .black,
-                                                                  )),
-                                                              //SizedBox(width: 5,),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    bool b =
-                                                                        false;
-                                                                    await MyAlertDialog.showConfirmationDialog(
-                                                                        context,
-                                                                        'هل تريد حقا اعادة جدولة هذا الحارس ',
-                                                                        () async {
-                                                                      b = true;
-                                                                    }, () {});
-                                                                    if (b) {
-                                                                      DateTime
-                                                                          d =
-                                                                          await _selectDate(
-                                                                              context);
-                                                                      String
-                                                                          date =
-                                                                          DateFormat('yyyy-MM-dd')
-                                                                              .format(d);
-
-                                                                      await addRecordToFirebase(
-                                                                          item,
-                                                                          date,
-                                                                          item.note
-                                                                              .toString());
-                                                                    }
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .schedule_outlined,
-                                                                    size: 30,
-                                                                    color: Colors
-                                                                        .red,
-                                                                  )),
-                                                            ],
-                                                          )),
-                                                        ]),
-                                                      )
-                                                      .toList()
-                                                  : this
-                                                      .newGardsList
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.company,
-                                                            style: TextStyle(
-                                                                fontSize: 18),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isDense: true,
-                                                                isExpanded:
-                                                                    true,
-
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              22),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
+                                                                  }).toList(),
+                                                                ),
                                                           ),
-                                                          DataCell(Row(
-                                                            children: [
-                                                              IconButton(
+                                                        ),
+                                                        DataCell(Row(
+                                                          children: [
+                                                            IconButton(
                                                                 onPressed:
                                                                     () async {
+                                                                  print(
+                                                                      'zzz');
                                                                   dynamic x =
-                                                                      await showDialog(
+                                                                  await showDialog(
                                                                     context:
-                                                                        context,
+                                                                    context,
                                                                     builder: (BuildContext
-                                                                            context) =>
+                                                                    context) =>
                                                                         AlertDialog(
-                                                                            backgroundColor:
-                                                                                Colors.transparent,
+                                                                            backgroundColor: Colors.transparent,
                                                                             content: AddNoteForm(
                                                                               callBack: (x) {
                                                                                 item.note = x;
                                                                               },
                                                                             )),
                                                                   );
+                                                                  print(item +
+                                                                      "item<<<<<");
                                                                 },
                                                                 icon: Icon(
                                                                   Icons
                                                                       .note_add_outlined,
                                                                   size: 30,
-                                                                ),
-                                                              ),
-                                                              //SizedBox(width: 5,),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    bool b =
-                                                                        false;
-                                                                    await MyAlertDialog.showConfirmationDialog(
-                                                                        context,
-                                                                        'هل تريد حقا اعادة جدولة هذا الحارس ',
-                                                                        () async {
-                                                                      b = true;
-                                                                    }, () {});
-                                                                    if (b) {
-                                                                      DateTime
-                                                                          d =
-                                                                          await _selectDate(
-                                                                              context);
-                                                                      String
-                                                                          date =
-                                                                          DateFormat('yyyy-MM-dd')
-                                                                              .format(d);
+                                                                  color: Colors
+                                                                      .red,
+                                                                )),
+                                                            //SizedBox(width: 5,),
+                                                            IconButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  bool b =
+                                                                  false;
+                                                                  await MyAlertDialog.showConfirmationDialog(
+                                                                      context,
+                                                                      'هل تريد حقا اعادة جدولة هذا الحارس ',
+                                                                          () async {
+                                                                        b = true;
+                                                                      }, () {});
+                                                                  if (b) {
+                                                                    DateTime
+                                                                    d =
+                                                                    await _selectDate(
+                                                                        context);
+                                                                    String
+                                                                    date =
+                                                                    DateFormat('yyyy-MM-dd')
+                                                                        .format(d);
 
-                                                                      await addRecordToFirebase(
-                                                                          item,
-                                                                          date,
-                                                                          item.note
-                                                                              .toString());
-                                                                    }
+                                                                    await addRecordToFirebase(
+                                                                        item,
+                                                                        date,
+                                                                        item.note
+                                                                            .toString());
+                                                                  }
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .schedule_outlined,
+                                                                  size: 30,
+                                                                )),
+                                                          ],
+                                                        )),
+                                                      ]),
+                                                )
+                                                    .toList()
+                                                    : this
+                                                    .newGardsList
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.company,
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isDense: true,
+                                                                  isExpanded:
+                                                                  true,
+
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
                                                                   },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .schedule_outlined,
-                                                                    size: 30,
-                                                                  )),
-                                                            ],
-                                                          )),
-                                                        ]),
-                                                      )
-                                                      .toList(),
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                      value,
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            22),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        DataCell(Row(
+                                                          children: [
+                                                            IconButton(
+                                                              onPressed:
+                                                                  () async {
+                                                                dynamic x =
+                                                                await showDialog(
+                                                                  context:
+                                                                  context,
+                                                                  builder: (BuildContext
+                                                                  context) =>
+                                                                      AlertDialog(
+                                                                          backgroundColor:
+                                                                          Colors.transparent,
+                                                                          content: AddNoteForm(
+                                                                            callBack: (x) {
+                                                                              item.note = x;
+                                                                            },
+                                                                          )),
+                                                                );
+                                                              },
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .note_add_outlined,
+                                                                size: 30,
+                                                              ),
+                                                            ),
+                                                            //SizedBox(width: 5,),
+                                                            IconButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  bool b =
+                                                                  false;
+                                                                  await MyAlertDialog.showConfirmationDialog(
+                                                                      context,
+                                                                      'هل تريد حقا اعادة جدولة هذا الحارس ',
+                                                                          () async {
+                                                                        b = true;
+                                                                      }, () {});
+                                                                  if (b) {
+                                                                    DateTime
+                                                                    d =
+                                                                    await _selectDate(
+                                                                        context);
+                                                                    String
+                                                                    date =
+                                                                    DateFormat('yyyy-MM-dd')
+                                                                        .format(d);
+
+                                                                    await addRecordToFirebase(
+                                                                        item,
+                                                                        date,
+                                                                        item.note
+                                                                            .toString());
+                                                                  }
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .schedule_outlined,
+                                                                  size: 30,
+                                                                )),
+                                                          ],
+                                                        )),
+                                                      ]),
+                                                )
+                                                    .toList(),
+                                              ),
                                             ),
-                                          ),
-                                          Center(
-                                            child: DataTable2(
-                                              scrollController:
-                                                  _scrollController,
-                                              dataRowHeight: 120,
-                                              columns: [
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الاسم",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الجنسية",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الشركة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "اسم الكورس",
-                                                  style:
-                                                      TextStyle(fontSize: 22),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الطول",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الوزن",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "النتيجة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "خيارات",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                              ],
-                                              rows: sFeacher
-                                                  ? this
-                                                      .searchByName(
-                                                          this.reNewGardsList,
-                                                          searchController.text
-                                                              .toString())
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.company,
-                                                            style: TextStyle(
-                                                                fontSize: 18),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                isDense: true,
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
+                                            Center(
+                                              child: DataTable2(
+                                                scrollController:
+                                                _scrollController,
+                                                dataRowHeight: 120,
+                                                columns: [
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الاسم",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الجنسية",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الشركة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "اسم الكورس",
+                                                        style:
+                                                        TextStyle(fontSize: 22),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الطول",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الوزن",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "النتيجة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "خيارات",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                ],
+                                                rows: sFeacher
+                                                    ? this
+                                                    .searchByName(
+                                                    this.reNewGardsList,
+                                                    searchController.text
+                                                        .toString())
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.company,
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isExpanded:
+                                                                  true,
+                                                                  isDense: true,
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
+                                                                  },
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
                                                                       value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              25),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          DataCell(Row(
-                                                            children: [
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    dynamic x =
-                                                                        await showDialog(
-                                                                      context:
-                                                                          context,
-                                                                      builder: (BuildContext
-                                                                              context) =>
-                                                                          AlertDialog(
-                                                                              backgroundColor: Colors.transparent,
-                                                                              content: AddNoteForm(
-                                                                                callBack: (x) {
-                                                                                  item.note = x;
-                                                                                },
-                                                                              )),
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            25),
+                                                                      ),
                                                                     );
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .note_add_outlined,
-                                                                    size: 30,
-                                                                  )),
-                                                              //SizedBox(width: 5,),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    bool b =
-                                                                        false;
-                                                                    await MyAlertDialog.showConfirmationDialog(
-                                                                        context,
-                                                                        'هل تريد حقا اعادة جدولة هذا الحارس ',
-                                                                        () async {
-                                                                      b = true;
-                                                                    }, () {});
-                                                                    if (b) {
-                                                                      DateTime
-                                                                          d =
-                                                                          await _selectDate(
-                                                                              context);
-                                                                      String
-                                                                          date =
-                                                                          DateFormat('yyyy-MM-dd')
-                                                                              .format(d);
-                                                                      await addRecordToFirebase(
-                                                                          item,
-                                                                          date,
-                                                                          item.note
-                                                                              .toString());
-                                                                    }
-                                                                  },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .schedule_outlined,
-                                                                    size: 30,
-                                                                  )),
-                                                            ],
-                                                          )),
-                                                        ]),
-                                                      )
-                                                      .toList()
-                                                  : this
-                                                      .reNewGardsList
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.company,
-                                                            style: TextStyle(
-                                                                fontSize: 18),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isDense: true,
-                                                                isExpanded:
-                                                                    true,
-
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              22),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
+                                                                  }).toList(),
+                                                                ),
                                                           ),
-                                                          DataCell(Row(
-                                                            children: [
-                                                              IconButton(
+                                                        ),
+                                                        DataCell(Row(
+                                                          children: [
+                                                            IconButton(
                                                                 onPressed:
                                                                     () async {
                                                                   dynamic x =
-                                                                      await showDialog(
+                                                                  await showDialog(
                                                                     context:
-                                                                        context,
+                                                                    context,
                                                                     builder: (BuildContext
-                                                                            context) =>
+                                                                    context) =>
                                                                         AlertDialog(
-                                                                            backgroundColor:
-                                                                                Colors.transparent,
+                                                                            backgroundColor: Colors.transparent,
                                                                             content: AddNoteForm(
                                                                               callBack: (x) {
                                                                                 item.note = x;
@@ -1027,49 +876,196 @@ class _homePageState extends State<homePage>
                                                                   Icons
                                                                       .note_add_outlined,
                                                                   size: 30,
-                                                                ),
-                                                              ),
-                                                              //SizedBox(width: 5,),
-                                                              IconButton(
-                                                                  onPressed:
-                                                                      () async {
-                                                                    bool b =
-                                                                        false;
-                                                                    await MyAlertDialog.showConfirmationDialog(
-                                                                        context,
-                                                                        'هل تريد حقا اعادة جدولة هذا الحارس ',
-                                                                        () async {
-                                                                      b = true;
-                                                                    }, () {});
-                                                                    if (b) {
-                                                                      DateTime
-                                                                          d =
-                                                                          await _selectDate(
-                                                                              context);
-                                                                      String
-                                                                          date =
-                                                                          DateFormat('yyyy-MM-dd')
-                                                                              .format(d);
+                                                                )),
+                                                            //SizedBox(width: 5,),
+                                                            IconButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  bool b =
+                                                                  false;
+                                                                  await MyAlertDialog.showConfirmationDialog(
+                                                                      context,
+                                                                      'هل تريد حقا اعادة جدولة هذا الحارس ',
+                                                                          () async {
+                                                                        b = true;
+                                                                      }, () {});
+                                                                  if (b) {
+                                                                    DateTime
+                                                                    d =
+                                                                    await _selectDate(
+                                                                        context);
+                                                                    String
+                                                                    date =
+                                                                    DateFormat('yyyy-MM-dd')
+                                                                        .format(d);
+                                                                    await addRecordToFirebase(
+                                                                        item,
+                                                                        date,
+                                                                        item.note
+                                                                            .toString());
+                                                                  }
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .schedule_outlined,
+                                                                  size: 30,
+                                                                )),
+                                                          ],
+                                                        )),
+                                                      ]),
+                                                )
+                                                    .toList()
+                                                    : this
+                                                    .reNewGardsList
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.company,
+                                                          style: TextStyle(
+                                                              fontSize: 18),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isDense: true,
+                                                                  isExpanded:
+                                                                  true,
 
-                                                                      await addRecordToFirebase(
-                                                                          item,
-                                                                          date,
-                                                                          item.note
-                                                                              .toString());
-                                                                    }
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
                                                                   },
-                                                                  icon: Icon(
-                                                                    Icons
-                                                                        .schedule_outlined,
-                                                                    size: 30,
-                                                                  )),
-                                                            ],
-                                                          )),
-                                                        ]),
-                                                      )
-                                                      .toList(),
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                      value,
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            22),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                ),
+                                                          ),
+                                                        ),
+                                                        DataCell(Row(
+                                                          children: [
+                                                            IconButton(
+                                                              onPressed:
+                                                                  () async {
+                                                                dynamic x =
+                                                                await showDialog(
+                                                                  context:
+                                                                  context,
+                                                                  builder: (BuildContext
+                                                                  context) =>
+                                                                      AlertDialog(
+                                                                          backgroundColor:
+                                                                          Colors.transparent,
+                                                                          content: AddNoteForm(
+                                                                            callBack: (x) {
+                                                                              item.note = x;
+                                                                            },
+                                                                          )),
+                                                                );
+                                                              },
+                                                              icon: Icon(
+                                                                Icons
+                                                                    .note_add_outlined,
+                                                                size: 30,
+                                                              ),
+                                                            ),
+                                                            //SizedBox(width: 5,),
+                                                            IconButton(
+                                                                onPressed:
+                                                                    () async {
+                                                                  bool b =
+                                                                  false;
+                                                                  await MyAlertDialog.showConfirmationDialog(
+                                                                      context,
+                                                                      'هل تريد حقا اعادة جدولة هذا الحارس ',
+                                                                          () async {
+                                                                        b = true;
+                                                                      }, () {});
+                                                                  if (b) {
+                                                                    DateTime
+                                                                    d =
+                                                                    await _selectDate(
+                                                                        context);
+                                                                    String
+                                                                    date =
+                                                                    DateFormat('yyyy-MM-dd')
+                                                                        .format(d);
 
-                                              /*map(
+                                                                    await addRecordToFirebase(
+                                                                        item,
+                                                                        date,
+                                                                        item.note
+                                                                            .toString());
+                                                                  }
+                                                                },
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .schedule_outlined,
+                                                                  size: 30,
+                                                                )),
+                                                          ],
+                                                        )),
+                                                      ]),
+                                                )
+                                                    .toList(),
+
+                                                /*map(
                                                         (item) =>
                                                             DataRow2(cells: [
                                                           DataCell(Text(
@@ -1212,239 +1208,124 @@ class _homePageState extends State<homePage>
                                                         ]),
                                                       )
                                                       .toList(),*/
+                                              ),
                                             ),
-                                          ),
-                                          Center(
-                                            child: DataTable2(
-                                              scrollController:
-                                                  _scrollController,
-                                              dataRowHeight: 120,
-                                              columns: [
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الاسم",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الجنسية",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "اسم الكورس",
-                                                  style:
-                                                      TextStyle(fontSize: 22),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الطول",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "الوزن",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "تاريخ الاعادة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "خيارات",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                                DataColumn2(
-                                                    label: Text(
-                                                  "النتيجة",
-                                                  style:
-                                                      TextStyle(fontSize: 25),
-                                                )),
-                                              ],
-                                              rows: sFeacher
-                                                  ? this
-                                                      .searchByName(
-                                                          this
-                                                              .reScedualGardsList,
-                                                          searchController.text
-                                                              .toString())
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.dob,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(IconButton(
-                                                              onPressed:
-                                                                  () async {
-                                                                dynamic x =
-                                                                    await showDialog(
-                                                                  context:
-                                                                      context,
-                                                                  builder: (BuildContext
-                                                                          context) =>
-                                                                      AlertDialog(
-                                                                          backgroundColor: Colors
-                                                                              .transparent,
-                                                                          content:
-                                                                              AddNoteForm(
-                                                                            callBack:
-                                                                                (x) {
-                                                                              item.note = x;
-                                                                            },
-                                                                          )),
-                                                                );
-                                                              },
-                                                              icon: Icon(
-                                                                Icons
-                                                                    .note_add_outlined,
-                                                                size: 30,
-                                                              ))),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                isDense: true,
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              25),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ]),
-                                                      )
-                                                      .toList()
-                                                  : this
-                                                      .reScedualGardsList
-                                                      .map(
-                                                        (item) =>
-                                                            DataRow2(cells: [
-                                                          DataCell(Text(
-                                                            item.nameEn,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.nationality,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.course,
-                                                            style: TextStyle(
-                                                                fontSize: 20),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.height,
-                                                            style: TextStyle(
-                                                                fontSize: 25),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.weight,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(Text(
-                                                            item.dob,
-                                                            style: TextStyle(
-                                                                fontSize: 25,
-                                                                color: Colors
-                                                                    .black),
-                                                          )),
-                                                          DataCell(IconButton(
+                                            Center(
+                                              child: DataTable2(
+                                                scrollController:
+                                                _scrollController,
+                                                dataRowHeight: 120,
+                                                columns: [
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الاسم",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الجنسية",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "اسم الكورس",
+                                                        style:
+                                                        TextStyle(fontSize: 22),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الطول",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "الوزن",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "تاريخ الاعادة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "خيارات",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                  DataColumn2(
+                                                      label: Text(
+                                                        "النتيجة",
+                                                        style:
+                                                        TextStyle(fontSize: 25),
+                                                      )),
+                                                ],
+                                                rows: sFeacher
+                                                    ? this
+                                                    .searchByName(
+                                                    this
+                                                        .reScedualGardsList,
+                                                    searchController.text
+                                                        .toString())
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.dob,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(IconButton(
                                                             onPressed:
                                                                 () async {
                                                               dynamic x =
-                                                                  await showDialog(
+                                                              await showDialog(
                                                                 context:
-                                                                    context,
+                                                                context,
                                                                 builder: (BuildContext
-                                                                        context) =>
+                                                                context) =>
                                                                     AlertDialog(
-                                                                        backgroundColor:
-                                                                            Colors
-                                                                                .transparent,
+                                                                        backgroundColor: Colors
+                                                                            .transparent,
                                                                         content:
-                                                                            AddNoteForm(
+                                                                        AddNoteForm(
                                                                           callBack:
                                                                               (x) {
-                                                                            item.note =
-                                                                                x;
+                                                                            item.note = x;
                                                                           },
                                                                         )),
                                                               );
@@ -1453,267 +1334,383 @@ class _homePageState extends State<homePage>
                                                               Icons
                                                                   .note_add_outlined,
                                                               size: 30,
-                                                            ),
-                                                          )),
-                                                          DataCell(
-                                                            StatefulBuilder(
-                                                              builder: (BuildContext
-                                                                          context,
-                                                                      StateSetter
-                                                                          setState) =>
-                                                                  DropdownButton<
-                                                                      String>(
-                                                                isExpanded:
-                                                                    true,
-                                                                isDense: true,
-                                                                value:
-                                                                    item.status,
-                                                                //item.status ,
-                                                                onChanged: (String?
-                                                                    newValue) {
-                                                                  setState(() {
-                                                                    item.status =
-                                                                        newValue;
-                                                                  });
-                                                                },
-                                                                items: <String>[
-                                                                  'Pass',
-                                                                  'Fail',
-                                                                  'Absence',
-                                                                  'Reject'
-                                                                ].map<
-                                                                    DropdownMenuItem<
-                                                                        String>>((String
-                                                                    value) {
-                                                                  return DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
+                                                            ))),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isExpanded:
+                                                                  true,
+                                                                  isDense: true,
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
+                                                                  },
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
                                                                       value,
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              25),
-                                                                    ),
-                                                                  );
-                                                                }).toList(),
-                                                              ),
-                                                            ),
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            25),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                ),
                                                           ),
-                                                        ]),
-                                                      )
-                                                      .toList(),
+                                                        ),
+                                                      ]),
+                                                )
+                                                    .toList()
+                                                    : this
+                                                    .reScedualGardsList
+                                                    .map(
+                                                      (item) =>
+                                                      DataRow2(cells: [
+                                                        DataCell(Text(
+                                                          item.nameEn,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.nationality,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.course,
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.height,
+                                                          style: TextStyle(
+                                                              fontSize: 25),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.weight,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(Text(
+                                                          item.dob,
+                                                          style: TextStyle(
+                                                              fontSize: 25,
+                                                              color: Colors
+                                                                  .black),
+                                                        )),
+                                                        DataCell(IconButton(
+                                                          onPressed:
+                                                              () async {
+                                                            dynamic x =
+                                                            await showDialog(
+                                                              context:
+                                                              context,
+                                                              builder: (BuildContext
+                                                              context) =>
+                                                                  AlertDialog(
+                                                                      backgroundColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                      content:
+                                                                      AddNoteForm(
+                                                                        callBack:
+                                                                            (x) {
+                                                                          item.note =
+                                                                              x;
+                                                                        },
+                                                                      )),
+                                                            );
+                                                          },
+                                                          icon: Icon(
+                                                            Icons
+                                                                .note_add_outlined,
+                                                            size: 30,
+                                                          ),
+                                                        )),
+                                                        DataCell(
+                                                          StatefulBuilder(
+                                                            builder: (BuildContext
+                                                            context,
+                                                                StateSetter
+                                                                setState) =>
+                                                                DropdownButton<
+                                                                    String>(
+                                                                  isExpanded:
+                                                                  true,
+                                                                  isDense: true,
+                                                                  value:
+                                                                  item.status,
+                                                                  //item.status ,
+                                                                  onChanged: (String?
+                                                                  newValue) {
+                                                                    setState(() {
+                                                                      item.status =
+                                                                          newValue;
+                                                                    });
+                                                                  },
+                                                                  items: <String>[
+                                                                    'Pass',
+                                                                    'Fail',
+                                                                    'Absence',
+                                                                    'Reject'
+                                                                  ].map<
+                                                                      DropdownMenuItem<
+                                                                          String>>((String
+                                                                  value) {
+                                                                    return DropdownMenuItem<
+                                                                        String>(
+                                                                      value:
+                                                                      value,
+                                                                      child: Text(
+                                                                        value,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                            25),
+                                                                      ),
+                                                                    );
+                                                                  }).toList(),
+                                                                ),
+                                                          ),
+                                                        ),
+                                                      ]),
+                                                )
+                                                    .toList(),
+                                              ),
                                             ),
-                                          ),
 
-                                          // Documents Tab
-                                        ],
+                                            // Documents Tab
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                )),
+                                    ],
+                                  )),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Animate(
-                      effects: [FadeEffect(), SlideEffect(begin: Offset(0, 0))],
-                      child: Positioned(
-                        top: 100,
-                        //MediaQuery.of(context).size.height - 150,
-                        right: 50,
-                        child: Container(
-                          width: screenSize.width - 100,
-                          //MediaQuery.of(context).size.width - 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                  child: Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: SearchBar22(
-                                  searchController: searchController,
-                                  onSearch: performSearch,
-                                  onClear: clearSearch,
+                      Animate(
+                        effects: [FadeEffect(), SlideEffect(begin: Offset(0, 0))],
+                        child: Positioned(
+                          top: 100,
+                          //MediaQuery.of(context).size.height - 150,
+                          right: 50,
+                          child: Container(
+                            width: screenSize.width - 100,
+                            //MediaQuery.of(context).size.width - 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 10,
                                 ),
-                              )),
-                              Expanded(
-                                child: Button(
-                                  txt: "نجاح للكل",
-                                  icon: Icons.subdirectory_arrow_left,
-                                  isSelected: true,
-                                  onPress: () {
-                                    try {
-                                      int idx = _tabController.index;
-                                      if (idx == 0) {
-                                        // new patch
-                                        for (var i in newGardsList) {
-                                          i.status = 'Pass';
-                                          i.status = 'Pass';
-                                        }
-                                        setState(() {});
-                                      } else {
-                                        // renew patch
-                                        for (var i in reNewGardsList) {
-                                          i.status = 'Pass';
-                                        }
-                                        setState(() {});
-                                      }
-                                    } catch (e) {
-                                      print(">>>>   " + e.toString());
-                                    }
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Button(
-                                  txt: "رسوب للكل",
-                                  icon: Icons.subdirectory_arrow_left,
-                                  isSelected: true,
-                                  onPress: () {
-                                    try {
-                                      int idx = _tabController.index;
-                                      if (idx == 0) {
-                                        // new patch
-                                        for (var i in newGardsList) {
-                                          i.status = 'Fail';
-                                        }
-                                        setState(() {});
-                                      } else {
-                                        // renew patch
-                                        for (var i in reNewGardsList) {
-                                          i.status = 'Fail';
-                                        }
-                                        setState(() {});
-                                      }
-                                    } catch (e) {
-                                      print(">>>>   " + e.toString());
-                                    }
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Button(
-                                  txt: "ارسال النتائج",
-                                  icon: Icons.subdirectory_arrow_left,
-                                  isSelected: true,
-                                  onPress: () async {
-                                    await showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          if (_tabController.index == 2) {
-                                            // print("debug");
-                                            if (!reScedualGardsList.isEmpty)
-                                              return AlertDialog(
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  content: sendginForm(
-                                                      batchNrVarInSendingForm:
-                                                          batchNrVar,
-                                                      tab: 2,
-                                                      rec: this
-                                                          .reScedualGardsList));
-
-                                            return AlertDialog(
-                                              title: Text('تنبيه'),
-                                              content: Text(
-                                                  'لا يوجد حراس ضمن اعادة الجدولة'),
-                                              actions: <Widget>[
-                                                TextButton(
-                                                  child: Text(
-                                                    'OK',
-                                                    style: TextStyle(
-                                                        color: Colors.black),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ),
-                                              ],
-                                            );
-                                          } else {
-                                            return AlertDialog(
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                content: sendginForm(
-                                                    batchNrVarInSendingForm:
-                                                        batchNrVar,
-                                                    tab: _tabController.index,
-                                                    rec: _tabController.index ==
-                                                            0
-                                                        ? this.newGardsList
-                                                        : this.reNewGardsList));
+                                Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 10),
+                                      child: SearchBar22(
+                                        searchController: searchController,
+                                        onSearch: performSearch,
+                                        onClear: clearSearch,
+                                      ),
+                                    )),
+                                Expanded(
+                                  child: Button(
+                                    txt: "نجاح للكل",
+                                    icon: Icons.subdirectory_arrow_left,
+                                    isSelected: true,
+                                    onPress: () {
+                                      try {
+                                        int idx = _tabController.index;
+                                        if (idx == 0) {
+                                          // new patch
+                                          for (var i in newGardsList) {
+                                            i.status = 'Pass';
+                                            i.status = 'Pass';
                                           }
-                                        });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Container(
-                                  height: 55,
-                                  decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(10)),
-
-                                      //  border: Border.all(color: Colors.white.withOpacity(0.3)),
-                                      color: Colors.grey.shade200
-                                          .withOpacity(0.45)),
-                                  child: DropdownButtonFormField<String>(
-                                    decoration: InputDecoration(
-                                      enabledBorder: InputBorder.none,
-                                      prefixText: '            Batch Nr:  ',
-                                    ),
-                                    value: batchNrVar,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        this.newGardsList = [];
-                                        batchNrVar = newValue!;
-                                      });
+                                          setState(() {});
+                                        } else {
+                                          // renew patch
+                                          for (var i in reNewGardsList) {
+                                            i.status = 'Pass';
+                                          }
+                                          setState(() {});
+                                        }
+                                      } catch (e) {
+                                        print(">>>>   " + e.toString());
+                                      }
                                     },
-                                    items: MyData.myList
-                                        .map((e) => DropdownMenuItem<String>(
-                                              value: e.toString(),
-                                              child: Text(e.toString()),
-                                            ))
-                                        .toList(),
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.0,
-                                    ),
-                                    dropdownColor: Colors.grey[200],
-                                    icon: Icon(Icons.arrow_drop_down),
-                                    isExpanded: true,
                                   ),
                                 ),
-                              ),
-                            ],
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Button(
+                                    txt: "رسوب للكل",
+                                    icon: Icons.subdirectory_arrow_left,
+                                    isSelected: true,
+                                    onPress: () {
+                                      try {
+                                        int idx = _tabController.index;
+                                        if (idx == 0) {
+                                          // new patch
+                                          for (var i in newGardsList) {
+                                            i.status = 'Fail';
+                                          }
+                                          setState(() {});
+                                        } else {
+                                          // renew patch
+                                          for (var i in reNewGardsList) {
+                                            i.status = 'Fail';
+                                          }
+                                          setState(() {});
+                                        }
+                                      } catch (e) {
+                                        print(">>>>   " + e.toString());
+                                      }
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Button(
+                                    txt: "ارسال النتائج",
+                                    icon: Icons.subdirectory_arrow_left,
+                                    isSelected: true,
+                                    onPress: () async {
+                                      await showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            if (_tabController.index == 2) {
+                                              // print("debug");
+
+                                              if (!reScedualGardsList.isEmpty)
+                                                return AlertDialog(
+                                                    backgroundColor:
+                                                    Colors.transparent,
+                                                    content: sendginForm(
+                                                        batchNrVarInSendingForm: batchNrVar,
+                                                        tab: 2,
+                                                        rec: this
+                                                            .reScedualGardsList));
+
+                                              return AlertDialog(
+                                                title: Text('تنبيه'),
+                                                content: Text(
+                                                    'لا يوجد حراس ضمن اعادة الجدولة'),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    child: Text(
+                                                      'OK',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    ),
+                                                    onPressed: () {
+                                                      Navigator.of(context).pop();
+                                                    },
+                                                  ),
+                                                ],
+                                              );
+                                            } else {
+                                              return AlertDialog(
+                                                  backgroundColor:
+                                                  Colors.transparent,
+                                                  content: sendginForm(
+                                                      batchNrVarInSendingForm: batchNrVar,
+                                                      tab: _tabController.index,
+                                                      rec: _tabController.index ==
+                                                          0
+                                                          ? this.newGardsList
+                                                          : this.reNewGardsList));
+                                            }
+                                          });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    height: 55,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10)),
+
+                                        //  border: Border.all(color: Colors.white.withOpacity(0.3)),
+                                        color: Colors.grey.shade200
+                                            .withOpacity(0.45)),
+                                    child: DropdownButtonFormField<String>(
+                                      decoration: InputDecoration(
+                                        enabledBorder: InputBorder.none,
+                                        prefixText: '            Batch Nr:  ',
+
+                                      ),
+
+                                      value: batchNrVar,
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          this.newGardsList = [] ;
+                                          batchNrVar = newValue!;
+                                        });
+                                      },
+                                      items: MyData.myList
+                                          .map((e) => DropdownMenuItem<String>(
+                                        value: e.toString(),
+                                        child: Text(e.toString()),
+                                      ))
+                                          .toList(),
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16.0,
+                                      ),
+                                      dropdownColor: Colors.grey[200],
+                                      icon: Icon(Icons.arrow_drop_down),
+                                      isExpanded: true,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    /*Positioned(
-                      top: 100,
-                      child: IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () async {
-                            // Get the screen size and resolution
-                          }),
-                    )*/
-                  ],
-                );
-              });
+                      Positioned(
+                        top: 100,
+                        child: IconButton(
+                            icon: Icon(Icons.add),
+                            onPressed: () async {
+                              // Get the screen size and resolution
+                            }),
+                      )
+                    ],
+                  );
+                });
             }
           }),
     );
@@ -1759,11 +1756,9 @@ class _homePageState extends State<homePage>
 
       for (int i = 0; i < count; i++) {
         String title =
-            dynamicResult2["response"]["results"][i]["batch"].toString();
+        dynamicResult2["response"]["results"][i]["batch"].toString();
         titles.add(title);
       }
-      //print(titles.toString() + "<<<<<<<<");
-      this.batchNrVar = titles[0];
 
       return titles;
     }
@@ -1775,137 +1770,133 @@ class _homePageState extends State<homePage>
   Future<List> fetchRecordsNewGards(String BatchNr) async {
     List<dynamic> records2 = [];
     List<String> patchNr = await getPatchNr();
-    String url =
-        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
+    String url = '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
     final response =
-        await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
+    await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body)["response"];
       // print(data[0]["results"]["batch"] ?? '404');
 
       final List<dynamic> records = data["results"]
           .map((item) => Record(
-              reschedule: item["xxx"] ?? '',
-              modifiedDate: item["Modified Date"] ?? '',
-              createdDate: item["Created Date"] ?? '',
-              createdBy: item["Created By"] ?? '',
-              assdAttachment: item["passport attachment"] ?? '',
-              assdExpiry: item["passport expiry"] ?? '',
-              assdNumber: item["passport number"] ?? '',
-              className: item["Class"].toString(),
-              //item["Class"] ?? '',
-              company: this.companyDic[item["company"]] ?? '',
-              course: item["course"] ?? '',
-              courseType: item["course-type"] ?? '',
-              dob: item["dob"] ?? '',
-              education: item["education"] ?? '',
-              eidBackAttachment: item["eid back attachment"] ?? '',
-              eidExpiry: item["eid expiry"] ?? '',
-              eidFrontAttachment: item["eid front attachment"] ?? '',
-              eidNumber: item["eid number"] ?? '',
-              empid: item["empid"] ?? '',
-              experienceInUae: item["experience in uae"] ?? '',
-              experienceOutUae: item["experience out uae"] ?? '',
-              gender: item["gender"] ?? '',
-              height: item["height"] ?? '',
-              language: item["language"] ?? '',
-              licenseFor: item["license for"] ?? '',
-              medicalReportAttachment: item["medical report attachment"] ?? '',
-              nameAr: item["name ar"] ?? '',
-              nameEn: item["name en"] ?? '',
-              nationalityAr: item["nationality ar"] ?? '',
-              nationality: item["nationality"] ?? '',
-              nsiAttachment: item["NSI attachment"] ?? '',
-              passportAttachment: item["passport attachment"] ?? '',
-              passportExpiry: item["passport expiry"] ?? '',
-              passportNumber: item["passport number"] ?? '',
-              photo: item["photo"] ?? '',
-              remarks: item["remarks"] ?? '',
-              securityExperience: item["security experience"] ?? '',
-              status: 'Pass',
-              trainee: item["Trainee"] ?? '',
-              uid: item["uid"] ?? '',
-              visaAttachment: item["visa attachment"] ?? '',
-              weight: item["weight"] ?? '',
-              returnRemarks: item["return remarks"] ?? '',
-              reviewedBy: item["Reviewed By"] ?? '',
-              completeDate: item["complete date"] ?? '',
-              isPaid: item["isPaid"] ?? false,
-              paymentVar: item["paymentVar"] ?? '',
-              paymentID: item["paymentID"] ?? 0,
-              pmethod: item["pmethod"] ?? '',
-              batch: item["batch"] ?? '',
-              id: item['_id'] ?? '',
-              note: item['note'] ?? ''))
+          reschedule: item["xxx"] ?? '',
+          modifiedDate: item["Modified Date"] ?? '',
+          createdDate: item["Created Date"] ?? '',
+          createdBy: item["Created By"] ?? '',
+          assdAttachment: item["passport attachment"] ?? '',
+          assdExpiry: item["passport expiry"] ?? '',
+          assdNumber: item["passport number"] ?? '',
+          className:  this.classDic[item["Class"]]?? item["Class"],  //item["Class"] ?? '',
+          company: this.companyDic[item["company"]] ?? '',
+          course: item["course"] ?? '',
+          courseType: item["course-type"] ?? '',
+          dob: item["dob"] ?? '',
+          education: item["education"] ?? '',
+          eidBackAttachment: item["eid back attachment"] ?? '',
+          eidExpiry: item["eid expiry"] ?? '',
+          eidFrontAttachment: item["eid front attachment"] ?? '',
+          eidNumber: item["eid number"] ?? '',
+          empid: item["empid"] ?? '',
+          experienceInUae: item["experience in uae"] ?? '',
+          experienceOutUae: item["experience out uae"] ?? '',
+          gender: item["gender"] ?? '',
+          height: item["height"] ?? '',
+          language: item["language"] ?? '',
+          licenseFor: item["license for"] ?? '',
+          medicalReportAttachment: item["medical report attachment"] ?? '',
+          nameAr: item["name ar"] ?? '',
+          nameEn: item["name en"] ?? '',
+          nationalityAr: item["nationality ar"] ?? '',
+          nationality: item["nationality"] ?? '',
+          nsiAttachment: item["NSI attachment"] ?? '',
+          passportAttachment: item["passport attachment"] ?? '',
+          passportExpiry: item["passport expiry"] ?? '',
+          passportNumber: item["passport number"] ?? '',
+          photo: item["photo"] ?? '',
+          remarks: item["remarks"] ?? '',
+          securityExperience: item["security experience"] ?? '',
+          status: 'Pass',
+          trainee: item["Trainee"] ?? '',
+          uid: item["uid"] ?? '',
+          visaAttachment: item["visa attachment"] ?? '',
+          weight: item["weight"] ?? '',
+          returnRemarks: item["return remarks"] ?? '',
+          reviewedBy: item["Reviewed By"] ?? '',
+          completeDate: item["complete date"] ?? '',
+          isPaid: item["isPaid"] ?? false,
+          paymentVar: item["paymentVar"] ?? '',
+          paymentID: item["paymentID"] ?? 0,
+          pmethod: item["pmethod"] ?? '',
+          batch: item["batch"] ?? '',
+          id: item['_id'] ?? '',
+          note: item['note'] ?? ''))
           .toList();
-      if (data['remaining'] != 0) {
-        String url2 =
-            'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
-        final remainingDataResponse = await http
-            .get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
-        final dynamic dataRe =
-            json.decode(remainingDataResponse.body)["response"];
+      if(data['remaining']!=0){
+        String url2 = 'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
+        final remainingDataResponse =
+        await http.get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
+        final dynamic dataRe = json.decode(remainingDataResponse.body)["response"];
         records2 = dataRe["results"]
             .map((item) => Record(
-                reschedule: item["xxx"] ?? '',
-                modifiedDate: item["Modified Date"] ?? '',
-                createdDate: item["Created Date"] ?? '',
-                createdBy: item["Created By"] ?? '',
-                assdAttachment: item["passport attachment"] ?? '',
-                assdExpiry: item["passport expiry"] ?? '',
-                assdNumber: item["passport number"] ?? '',
-                className:item["Class"].toString(),
-                //item["Class"] ?? '',
-                company: this.companyDic[item["company"]] ?? '',
-                course: item["course"] ?? '',
-                courseType: item["course-type"] ?? '',
-                dob: item["dob"] ?? '',
-                education: item["education"] ?? '',
-                eidBackAttachment: item["eid back attachment"] ?? '',
-                eidExpiry: item["eid expiry"] ?? '',
-                eidFrontAttachment: item["eid front attachment"] ?? '',
-                eidNumber: item["eid number"] ?? '',
-                empid: item["empid"] ?? '',
-                experienceInUae: item["experience in uae"] ?? '',
-                experienceOutUae: item["experience out uae"] ?? '',
-                gender: item["gender"] ?? '',
-                height: item["height"] ?? '',
-                language: item["language"] ?? '',
-                licenseFor: item["license for"] ?? '',
-                medicalReportAttachment:
-                    item["medical report attachment"] ?? '',
-                nameAr: item["name ar"] ?? '',
-                nameEn: item["name en"] ?? '',
-                nationalityAr: item["nationality ar"] ?? '',
-                nationality: item["nationality"] ?? '',
-                nsiAttachment: item["NSI attachment"] ?? '',
-                passportAttachment: item["passport attachment"] ?? '',
-                passportExpiry: item["passport expiry"] ?? '',
-                passportNumber: item["passport number"] ?? '',
-                photo: item["photo"] ?? '',
-                remarks: item["remarks"] ?? '',
-                securityExperience: item["security experience"] ?? '',
-                status: 'Pass',
-                trainee: item["Trainee"] ?? '',
-                uid: item["uid"] ?? '',
-                visaAttachment: item["visa attachment"] ?? '',
-                weight: item["weight"] ?? '',
-                returnRemarks: item["return remarks"] ?? '',
-                reviewedBy: item["Reviewed By"] ?? '',
-                completeDate: item["complete date"] ?? '',
-                isPaid: item["isPaid"] ?? false,
-                paymentVar: item["paymentVar"] ?? '',
-                paymentID: item["paymentID"] ?? 0,
-                pmethod: item["pmethod"] ?? '',
-                batch: item["batch"] ?? '',
-                id: item['_id'] ?? '',
-                note: item['note'] ?? ''))
+            reschedule: item["xxx"] ?? '',
+            modifiedDate: item["Modified Date"] ?? '',
+            createdDate: item["Created Date"] ?? '',
+            createdBy: item["Created By"] ?? '',
+            assdAttachment: item["passport attachment"] ?? '',
+            assdExpiry: item["passport expiry"] ?? '',
+            assdNumber: item["passport number"] ?? '',
+            className:  this.classDic[item["Class"]]?? item["Class"] ,  //item["Class"] ?? '',
+            company: this.companyDic[item["company"]] ?? '',
+            course: item["course"] ?? '',
+            courseType: item["course-type"] ?? '',
+            dob: item["dob"] ?? '',
+            education: item["education"] ?? '',
+            eidBackAttachment: item["eid back attachment"] ?? '',
+            eidExpiry: item["eid expiry"] ?? '',
+            eidFrontAttachment: item["eid front attachment"] ?? '',
+            eidNumber: item["eid number"] ?? '',
+            empid: item["empid"] ?? '',
+            experienceInUae: item["experience in uae"] ?? '',
+            experienceOutUae: item["experience out uae"] ?? '',
+            gender: item["gender"] ?? '',
+            height: item["height"] ?? '',
+            language: item["language"] ?? '',
+            licenseFor: item["license for"] ?? '',
+            medicalReportAttachment: item["medical report attachment"] ?? '',
+            nameAr: item["name ar"] ?? '',
+            nameEn: item["name en"] ?? '',
+            nationalityAr: item["nationality ar"] ?? '',
+            nationality: item["nationality"] ?? '',
+            nsiAttachment: item["NSI attachment"] ?? '',
+            passportAttachment: item["passport attachment"] ?? '',
+            passportExpiry: item["passport expiry"] ?? '',
+            passportNumber: item["passport number"] ?? '',
+            photo: item["photo"] ?? '',
+            remarks: item["remarks"] ?? '',
+            securityExperience: item["security experience"] ?? '',
+            status: 'Pass',
+            trainee: item["Trainee"] ?? '',
+            uid: item["uid"] ?? '',
+            visaAttachment: item["visa attachment"] ?? '',
+            weight: item["weight"] ?? '',
+            returnRemarks: item["return remarks"] ?? '',
+            reviewedBy: item["Reviewed By"] ?? '',
+            completeDate: item["complete date"] ?? '',
+            isPaid: item["isPaid"] ?? false,
+            paymentVar: item["paymentVar"] ?? '',
+            paymentID: item["paymentID"] ?? 0,
+            pmethod: item["pmethod"] ?? '',
+            batch: item["batch"] ?? '',
+            id: item['_id'] ?? '',
+            note: item['note'] ?? ''))
             .toList();
+
       }
       batchNr = records[0].batch.toString() ?? '';
       MyData.data = batchNr;
-      this.newGardsList = records + records2;
+      this.newGardsList = records + records2 ;
       //print(this.newGardsList.length);
+
 
       return records;
     } else {
@@ -1917,133 +1908,131 @@ class _homePageState extends State<homePage>
     List<dynamic> records2 = [];
     List<String> patchNr = await getPatchNr();
     String url =
-        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
+    '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
     final response =
-        await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
+    await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body)["response"];
       final List<dynamic> records = data["results"]
           .map((item) => Record(
-              reschedule: item["zxz"] ?? '',
-              modifiedDate: item["Modified Date"] ?? '',
-              createdDate: item["Created Date"] ?? '',
-              createdBy: item["Created By"] ?? '',
-              assdAttachment: item["passport attachment"] ?? '',
-              assdExpiry: item["passport expiry"] ?? '',
-              assdNumber: item["passport number"] ?? '',
-              className: item["Class"] ,
-              company: this.companyDic[item["company"]] ?? '',
-              course: item["course"] ?? '',
-              courseType: item["course-type"] ?? '',
-              dob: item["dob"] ?? '',
-              education: item["education"] ?? '',
-              eidBackAttachment: item["eid back attachment"] ?? '',
-              eidExpiry: item["eid expiry"] ?? '',
-              eidFrontAttachment: item["eid front attachment"] ?? '',
-              eidNumber: item["eid number"] ?? '',
-              empid: item["empid"] ?? '',
-              experienceInUae: item["experience in uae"] ?? '',
-              experienceOutUae: item["experience out uae"] ?? '',
-              gender: item["gender"] ?? '',
-              height: item["height"] ?? '',
-              language: item["language"] ?? '',
-              licenseFor: item["license for"] ?? '',
-              medicalReportAttachment: item["medical report attachment"] ?? '',
-              nameAr: item["name ar"] ?? '',
-              nameEn: item["name en"] ?? '',
-              nationalityAr: item["nationality ar"] ?? '',
-              nationality: item["nationality"] ?? '',
-              nsiAttachment: item["NSI attachment"] ?? '',
-              passportAttachment: item["passport attachment"] ?? '',
-              passportExpiry: item["passport expiry"] ?? '',
-              passportNumber: item["passport number"] ?? '',
-              photo: item["photo"] ?? '',
-              remarks: item["remarks"] ?? '',
-              securityExperience: item["security experience"] ?? '',
-              status: 'Pass' ?? '',
-              trainee: item["Trainee"] ?? '',
-              uid: item["uid"] ?? '',
-              visaAttachment: item["visa attachment"] ?? '',
-              weight: item["weight"] ?? '',
-              returnRemarks: item["return remarks"] ?? '',
-              reviewedBy: item["Reviewed By"] ?? '',
-              completeDate: item["complete date"] ?? '',
-              isPaid: item["isPaid"] ?? false,
-              paymentVar: item["paymentVar"] ?? '',
-              paymentID: item["paymentID"] ?? 0,
-              pmethod: item["pmethod"] ?? '',
-              batch: item["batch"] ?? '',
-              id: item['_id'] ?? '',
-              note: item['note'] ?? ''))
+          reschedule: item["zxz"] ?? '',
+          modifiedDate: item["Modified Date"] ?? '',
+          createdDate: item["Created Date"] ?? '',
+          createdBy: item["Created By"] ?? '',
+          assdAttachment: item["passport attachment"] ?? '',
+          assdExpiry: item["passport expiry"] ?? '',
+          assdNumber: item["passport number"] ?? '',
+          className:  this.classDic[item["Class"]] ?? item["Class"],
+          company: this.companyDic[item["company"]] ?? '',
+          course: item["course"] ?? '',
+          courseType: item["course-type"] ?? '',
+          dob: item["dob"] ?? '',
+          education: item["education"] ?? '',
+          eidBackAttachment: item["eid back attachment"] ?? '',
+          eidExpiry: item["eid expiry"] ?? '',
+          eidFrontAttachment: item["eid front attachment"] ?? '',
+          eidNumber: item["eid number"] ?? '',
+          empid: item["empid"] ?? '',
+          experienceInUae: item["experience in uae"] ?? '',
+          experienceOutUae: item["experience out uae"] ?? '',
+          gender: item["gender"] ?? '',
+          height: item["height"] ?? '',
+          language: item["language"] ?? '',
+          licenseFor: item["license for"] ?? '',
+          medicalReportAttachment: item["medical report attachment"] ?? '',
+          nameAr: item["name ar"] ?? '',
+          nameEn: item["name en"] ?? '',
+          nationalityAr: item["nationality ar"] ?? '',
+          nationality: item["nationality"] ?? '',
+          nsiAttachment: item["NSI attachment"] ?? '',
+          passportAttachment: item["passport attachment"] ?? '',
+          passportExpiry: item["passport expiry"] ?? '',
+          passportNumber: item["passport number"] ?? '',
+          photo: item["photo"] ?? '',
+          remarks: item["remarks"] ?? '',
+          securityExperience: item["security experience"] ?? '',
+          status: 'Pass' ?? '',
+          trainee: item["Trainee"] ?? '',
+          uid: item["uid"] ?? '',
+          visaAttachment: item["visa attachment"] ?? '',
+          weight: item["weight"] ?? '',
+          returnRemarks: item["return remarks"] ?? '',
+          reviewedBy: item["Reviewed By"] ?? '',
+          completeDate: item["complete date"] ?? '',
+          isPaid: item["isPaid"] ?? false,
+          paymentVar: item["paymentVar"] ?? '',
+          paymentID: item["paymentID"] ?? 0,
+          pmethod: item["pmethod"] ?? '',
+          batch: item["batch"] ?? '',
+          id: item['_id'] ?? '',
+          note: item['note'] ?? ''))
           .toList();
 
-      if (data['remaining'] != 0) {
-        String url2 =
-            'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
-        final remainingDataResponse = await http
-            .get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
-        final dynamic dataRe =
-            json.decode(remainingDataResponse.body)["response"];
+      if(data['remaining']!=0){
+        String url2 = 'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
+        final remainingDataResponse =
+        await http.get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
+        final dynamic dataRe = json.decode(remainingDataResponse.body)["response"];
         records2 = dataRe["results"]
             .map((item) => Record(
-                reschedule: item["xxx"] ?? '',
-                modifiedDate: item["Modified Date"] ?? '',
-                createdDate: item["Created Date"] ?? '',
-                createdBy: item["Created By"] ?? '',
-                assdAttachment: item["passport attachment"] ?? '',
-                assdExpiry: item["passport expiry"] ?? '',
-                assdNumber: item["passport number"] ?? '',
-                className:  item["Class"].toString(),
-                //item["Class"] ?? '',
-                company: this.companyDic[item["company"]] ?? '',
-                course: item["course"] ?? '',
-                courseType: item["course-type"] ?? '',
-                dob: item["dob"] ?? '',
-                education: item["education"] ?? '',
-                eidBackAttachment: item["eid back attachment"] ?? '',
-                eidExpiry: item["eid expiry"] ?? '',
-                eidFrontAttachment: item["eid front attachment"] ?? '',
-                eidNumber: item["eid number"] ?? '',
-                empid: item["empid"] ?? '',
-                experienceInUae: item["experience in uae"] ?? '',
-                experienceOutUae: item["experience out uae"] ?? '',
-                gender: item["gender"] ?? '',
-                height: item["height"] ?? '',
-                language: item["language"] ?? '',
-                licenseFor: item["license for"] ?? '',
-                medicalReportAttachment:
-                    item["medical report attachment"] ?? '',
-                nameAr: item["name ar"] ?? '',
-                nameEn: item["name en"] ?? '',
-                nationalityAr: item["nationality ar"] ?? '',
-                nationality: item["nationality"] ?? '',
-                nsiAttachment: item["NSI attachment"] ?? '',
-                passportAttachment: item["passport attachment"] ?? '',
-                passportExpiry: item["passport expiry"] ?? '',
-                passportNumber: item["passport number"] ?? '',
-                photo: item["photo"] ?? '',
-                remarks: item["remarks"] ?? '',
-                securityExperience: item["security experience"] ?? '',
-                status: 'Pass',
-                trainee: item["Trainee"] ?? '',
-                uid: item["uid"] ?? '',
-                visaAttachment: item["visa attachment"] ?? '',
-                weight: item["weight"] ?? '',
-                returnRemarks: item["return remarks"] ?? '',
-                reviewedBy: item["Reviewed By"] ?? '',
-                completeDate: item["complete date"] ?? '',
-                isPaid: item["isPaid"] ?? false,
-                paymentVar: item["paymentVar"] ?? '',
-                paymentID: item["paymentID"] ?? 0,
-                pmethod: item["pmethod"] ?? '',
-                batch: item["batch"] ?? '',
-                id: item['_id'] ?? '',
-                note: item['note'] ?? ''))
+            reschedule: item["xxx"] ?? '',
+            modifiedDate: item["Modified Date"] ?? '',
+            createdDate: item["Created Date"] ?? '',
+            createdBy: item["Created By"] ?? '',
+            assdAttachment: item["passport attachment"] ?? '',
+            assdExpiry: item["passport expiry"] ?? '',
+            assdNumber: item["passport number"] ?? '',
+            className:  this.classDic[item["Class"]]??item["Class"] ,  //item["Class"] ?? '',
+            company: this.companyDic[item["company"]] ?? '',
+            course: item["course"] ?? '',
+            courseType: item["course-type"] ?? '',
+            dob: item["dob"] ?? '',
+            education: item["education"] ?? '',
+            eidBackAttachment: item["eid back attachment"] ?? '',
+            eidExpiry: item["eid expiry"] ?? '',
+            eidFrontAttachment: item["eid front attachment"] ?? '',
+            eidNumber: item["eid number"] ?? '',
+            empid: item["empid"] ?? '',
+            experienceInUae: item["experience in uae"] ?? '',
+            experienceOutUae: item["experience out uae"] ?? '',
+            gender: item["gender"] ?? '',
+            height: item["height"] ?? '',
+            language: item["language"] ?? '',
+            licenseFor: item["license for"] ?? '',
+            medicalReportAttachment: item["medical report attachment"] ?? '',
+            nameAr: item["name ar"] ?? '',
+            nameEn: item["name en"] ?? '',
+            nationalityAr: item["nationality ar"] ?? '',
+            nationality: item["nationality"] ?? '',
+            nsiAttachment: item["NSI attachment"] ?? '',
+            passportAttachment: item["passport attachment"] ?? '',
+            passportExpiry: item["passport expiry"] ?? '',
+            passportNumber: item["passport number"] ?? '',
+            photo: item["photo"] ?? '',
+            remarks: item["remarks"] ?? '',
+            securityExperience: item["security experience"] ?? '',
+            status: 'Pass',
+            trainee: item["Trainee"] ?? '',
+            uid: item["uid"] ?? '',
+            visaAttachment: item["visa attachment"] ?? '',
+            weight: item["weight"] ?? '',
+            returnRemarks: item["return remarks"] ?? '',
+            reviewedBy: item["Reviewed By"] ?? '',
+            completeDate: item["complete date"] ?? '',
+            isPaid: item["isPaid"] ?? false,
+            paymentVar: item["paymentVar"] ?? '',
+            paymentID: item["paymentID"] ?? 0,
+            pmethod: item["pmethod"] ?? '',
+            batch: item["batch"] ?? '',
+            id: item['_id'] ?? '',
+            note: item['note'] ?? ''))
             .toList();
+
       }
 
+
       this.reNewGardsList = records + records2;
-      //print( this.reNewGardsList.length);
+      print( this.reNewGardsList.length);
       return records;
     } else {
       throw Exception('Failed to load records');
@@ -2056,7 +2045,7 @@ class _homePageState extends State<homePage>
     try {
       // Access the Firestore collection where your data is stored
       CollectionReference collectionRef =
-          FirebaseFirestore.instance.collection('reschedule');
+      FirebaseFirestore.instance.collection('reschedule');
 
       // Retrieve the documents from the collection
       QuerySnapshot querySnapshot = await collectionRef.get();
@@ -2068,7 +2057,6 @@ class _homePageState extends State<homePage>
         String redate = data['redate'] ?? 'notFound404';
         data = data['gard'];
 
-
         // Create a Record object from the data
         Record record = Record(
             reschedule: data["zxz"] ?? 'notfund404',
@@ -2078,7 +2066,7 @@ class _homePageState extends State<homePage>
             assdAttachment: data["passport attachment"] ?? '',
             assdExpiry: data["passport expiry"] ?? '',
             assdNumber: data["passport number"] ?? '',
-            className:data["className"],
+            className: data["Class"] ?? '',
             company: data["company"] ?? '',
             course: data["course"] ?? '',
             courseType: data["coursetype"] ?? '',
@@ -2139,17 +2127,24 @@ class _homePageState extends State<homePage>
     try {
       if (this.newGardsList.isEmpty) {
         this.companyDic = await getCompanyData() as Map<String, dynamic>;
+        List<String> patchNrsList = await getPatchNr();
+        MyData.myList = Set<String>.from(patchNrsList).toList();
+        this.batchNrVar = Set<String>.from(patchNrsList).toList()[0];
+
         await fetchOngoingClasses();
         await fetchRecordsNewGards(batchNrVar);
         await fetchRecordsReNewGards(batchNrVar);
         await fetchRecordsReScedualGards();
 
-        List<String> patchNrsList = await getPatchNr();
-        MyData.myList = Set<String>.from(patchNrsList).toList();
+
+
+
 
         // await getExcludedEmployeeIds();
       } else {
         print('already loaded');
+
+
       }
     } catch (e) {
       print(e);
@@ -2157,8 +2152,7 @@ class _homePageState extends State<homePage>
   }
 
   Future<Map<String, String>> fetchOngoingClasses() async {
-    final url =
-        'https://www.tsti.ae/version-live/api/1.1/obj/classes/?constraints=[ { \"key\": \"Status\", \"constraint_type\": \"equals\", \"value\": \"Ongoing\" }]';
+    final url = 'https://www.tsti.ae/version-live/api/1.1/obj/classes/?constraints=[ { \"key\": \"Status\", \"constraint_type\": \"equals\", \"value\": \"Ongoing\" }]';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
@@ -2169,13 +2163,15 @@ class _homePageState extends State<homePage>
         final title = classData['title'];
         classMap[id] = title;
       }
-
-      this.classDic = classMap;
+      this.classDic = classMap ;
       return classMap;
     } else {
+
       throw Exception('Failed to fetch ongoing classes');
     }
   }
+
+
 
   List<dynamic> searchByName(List<dynamic> records, String name) {
     if (name.isEmpty) {
@@ -2193,7 +2189,7 @@ class _homePageState extends State<homePage>
 
   Future<List<String>> getExcludedEmployeeIds() async {
     QuerySnapshot rescheduleSnapshot =
-        await FirebaseFirestore.instance.collection('reschedule').get();
+    await FirebaseFirestore.instance.collection('reschedule').get();
 
     List<String> excludedIds = rescheduleSnapshot.docs.map((doc) {
       Map<String, dynamic> gardData = doc.data() as Map<String, dynamic>;
@@ -2249,7 +2245,7 @@ class _homePageState extends State<homePage>
     try {
       // Access the "reschedule" collection
       CollectionReference collection =
-          FirebaseFirestore.instance.collection('reschedule');
+      FirebaseFirestore.instance.collection('reschedule');
 
       // Create a new document with an auto-generated ID
       DocumentReference document = collection.doc();
@@ -2271,6 +2267,7 @@ class _homePageState extends State<homePage>
       print('Error adding record: $e');
     }
   }
+
 }
 
 void doNothing(BuildContext context) {}
@@ -2296,6 +2293,16 @@ Future<void> createDocumentWithId(String documentId) async {
   docRef
       .set(data)
       .then((value) =>
-          print('Document created successfully with ID: $documentId'))
+      print('Document created successfully with ID: $documentId'))
       .catchError((error) => print('Failed to create document: $error'));
 }
+
+
+
+
+
+
+
+
+
+
