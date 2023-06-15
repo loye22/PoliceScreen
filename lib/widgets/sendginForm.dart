@@ -22,6 +22,7 @@ class sendginForm extends StatefulWidget {
   bool f3 = true ;
   final String batchNrVarInSendingForm ;
 
+
   sendginForm({super.key, required this.rec, required this.tab , required this.batchNrVarInSendingForm});
 
 
@@ -32,6 +33,7 @@ class sendginForm extends StatefulWidget {
 }
 
 class _sendginFormState extends State<sendginForm> {
+
   Map<String, double> countStatus(List<dynamic> records) {
     final statusCount = <String, double>{
       'Pass': 0,
@@ -94,6 +96,7 @@ class _sendginFormState extends State<sendginForm> {
   String title = '';
   bool isLoding = false;
   double space = 10;
+
 
   @override
   Widget build(BuildContext context) {
@@ -499,10 +502,7 @@ class _sendginFormState extends State<sendginForm> {
                                     FirebaseFirestore.instance
                                         .collection(
                                       // this is list of the patch nr where we fetching
-                                        'testForlouie')
-                                        .doc()
-                                        .collection(
-                                        'reSchedual');
+                                        'rescheduleResults').doc(widget.batchNrVarInSendingForm).collection('gards');
 
                                     // Create a new batch
                                     WriteBatch batchRE =
@@ -510,7 +510,7 @@ class _sendginFormState extends State<sendginForm> {
                                         .batch();
 
                                     // Iterate over each record in the list
-                                    for (var record in widget.rec) {
+                                    /*for (var record in widget.rec) {
                                       // Create a new document reference with a unique ID
                                       DocumentReference
                                       documentRef =
@@ -541,13 +541,66 @@ class _sendginFormState extends State<sendginForm> {
                                         'note': record.note ?? '' ,
                                         'className' : record.className
                                       });
+                                    }*/
+                                    for (var record in widget.rec) {
+                                      // Create a new document reference with a unique ID
+                                      DocumentReference documentRef =
+                                      collectionRef.doc();
+
+                                      // Add the record data to the batch
+                                      batchRE.set(documentRef, {
+                                        'company':
+                                        record.company ?? '',
+                                        'course': record.course ?? '',
+                                        'coursetype':
+                                        record.courseType ?? '',
+                                        'employeeid':
+                                        record.empid ?? '',
+                                        'height': record.height ?? '',
+                                        'name': record.nameEn ?? '',
+                                        'nationality':
+                                        record.nationality ?? '',
+                                        'result': record.status ?? '',
+                                        'signature': downloadURL ??
+                                            '404notfound',
+                                        'weight': record.weight ?? '',
+                                        'note':
+                                        record.note ?? 'defalst' ,
+                                        'signature2' : s2 ,
+                                        'signature3' : s3 ,
+                                        'name1' : 'sayaah',
+                                        'rank1' : 'Rank1111' ,
+                                        'name2' : nameController2.text ,
+                                        'rank2' : rankController2.text ,
+                                        'name3' : nameController3.text ,
+                                        'rank3' : rankController3.text ,
+                                        'className' :record.className
+                                      });
+                                    //  print(record.className + "<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                  //    print(MyData.getDataByKey(record.className));
+
+
+
                                     }
+
 
                                     // Commit the batch to Firestore
                                     await batchRE.commit();
+
+                                    // delete the reschdeul collection after this
+
+                                    FirebaseFirestore firestore = FirebaseFirestore.instance;
+                                    CollectionReference collection = firestore.collection('reschedule');
+
+                                    QuerySnapshot querySnapshot = await collection.get();
+
+                                    for (DocumentSnapshot docSnapshot in querySnapshot.docs) {
+                                      await docSnapshot.reference.delete();
+                                    }
+
+
                                     return;
                                   }
-
                                   // this line to check if this collection with batch nr is exesit or not
                                   // true ==> the doc already uploded
                                   // false ==>
@@ -555,15 +608,10 @@ class _sendginFormState extends State<sendginForm> {
                                       ? "new"
                                       : "renew");
                                   print(widget.rec.length);
-
-
-
                                   if(condition){
                                     MyDialog.showAlert(context,'هذه الدفعة موجودة بالفعل في النظام , يرجى التاكد من التبويب جديد او تجديد و المجاولة من جديد') ;
                                     return;
-
                                   }
-
                                   // handle the new and renew gards
                                   CollectionReference
                                   collectionRef =
@@ -605,6 +653,8 @@ class _sendginFormState extends State<sendginForm> {
                                       record.note ?? 'defalst' ,
                                       'signature2' : s2 ,
                                       'signature3' : s3 ,
+                                      'name1' : 'sayaah',
+                                      'rank1' : 'Rank1111' ,
                                       'name2' : nameController2.text ,
                                       'rank2' : rankController2.text ,
                                       'name3' : nameController3.text ,

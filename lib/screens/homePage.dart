@@ -24,8 +24,9 @@ import '../models/PopupUtils.dart';
 import '../models/record.dart';
 import '../models/staticData.dart';
 import '../widgets/button.dart';
-import '../widgets/searchBar.dart';
 import 'dart:ui' as ui;
+
+import '../widgets/searchBar.dart';
 
 class homePage extends StatefulWidget {
   static const routeName = '/homePage';
@@ -44,7 +45,7 @@ class _homePageState extends State<homePage>
   String startDate = "20/20/2020";
   String endDate = "20/20/2030";
   String instructorName = "Nitro";
-  String batchNrVar = '45';
+  String batchNrVar = '40';
   List<Map<String, dynamic>> data = [
     {
       "Name": "John",
@@ -184,7 +185,8 @@ class _homePageState extends State<homePage>
   List<dynamic> reNewGardsList = [];
   List<dynamic> reScedualGardsList = [];
   Map<String, dynamic> companyDic = {};
-  Map <String,String> classDic = {} ;
+  Map<String, String> classDic = {};
+
   final _scrollController = ScrollController();
   bool sFeacher = false;
   String batchNr = '';
@@ -519,7 +521,7 @@ class _homePageState extends State<homePage>
                                                                         .note_add_outlined,
                                                                     size: 30,
                                                                     color: Colors
-                                                                        .red,
+                                                                        .black,
                                                                   )),
                                                               //SizedBox(width: 5,),
                                                               IconButton(
@@ -554,6 +556,8 @@ class _homePageState extends State<homePage>
                                                                     Icons
                                                                         .schedule_outlined,
                                                                     size: 30,
+                                                                    color: Colors
+                                                                        .red,
                                                                   )),
                                                             ],
                                                           )),
@@ -1530,7 +1534,7 @@ class _homePageState extends State<homePage>
                               Expanded(
                                   child: Padding(
                                 padding: const EdgeInsets.only(right: 10),
-                                child: SearchBar(
+                                child: SearchBar22(
                                   searchController: searchController,
                                   onSearch: performSearch,
                                   onClear: clearSearch,
@@ -1608,13 +1612,13 @@ class _homePageState extends State<homePage>
                                         builder: (BuildContext context) {
                                           if (_tabController.index == 2) {
                                             // print("debug");
-
                                             if (!reScedualGardsList.isEmpty)
                                               return AlertDialog(
                                                   backgroundColor:
                                                       Colors.transparent,
                                                   content: sendginForm(
-                                                    batchNrVarInSendingForm: batchNrVar,
+                                                      batchNrVarInSendingForm:
+                                                          batchNrVar,
                                                       tab: 2,
                                                       rec: this
                                                           .reScedualGardsList));
@@ -1641,7 +1645,8 @@ class _homePageState extends State<homePage>
                                                 backgroundColor:
                                                     Colors.transparent,
                                                 content: sendginForm(
-                                                  batchNrVarInSendingForm: batchNrVar,
+                                                    batchNrVarInSendingForm:
+                                                        batchNrVar,
                                                     tab: _tabController.index,
                                                     rec: _tabController.index ==
                                                             0
@@ -1666,16 +1671,14 @@ class _homePageState extends State<homePage>
                                       color: Colors.grey.shade200
                                           .withOpacity(0.45)),
                                   child: DropdownButtonFormField<String>(
-                                   decoration: InputDecoration(
-                                     enabledBorder: InputBorder.none,
-                                    prefixText: '            Batch Nr:  ',
-
-                                   ),
-
+                                    decoration: InputDecoration(
+                                      enabledBorder: InputBorder.none,
+                                      prefixText: '            Batch Nr:  ',
+                                    ),
                                     value: batchNrVar,
                                     onChanged: (newValue) {
                                       setState(() {
-                                        this.newGardsList = [] ;
+                                        this.newGardsList = [];
                                         batchNrVar = newValue!;
                                       });
                                     },
@@ -1700,14 +1703,14 @@ class _homePageState extends State<homePage>
                         ),
                       ),
                     ),
-                    Positioned(
+                    /*Positioned(
                       top: 100,
                       child: IconButton(
                           icon: Icon(Icons.add),
                           onPressed: () async {
                             // Get the screen size and resolution
                           }),
-                    )
+                    )*/
                   ],
                 );
               });
@@ -1759,6 +1762,8 @@ class _homePageState extends State<homePage>
             dynamicResult2["response"]["results"][i]["batch"].toString();
         titles.add(title);
       }
+      //print(titles.toString() + "<<<<<<<<");
+      this.batchNrVar = titles[0];
 
       return titles;
     }
@@ -1770,7 +1775,8 @@ class _homePageState extends State<homePage>
   Future<List> fetchRecordsNewGards(String BatchNr) async {
     List<dynamic> records2 = [];
     List<String> patchNr = await getPatchNr();
-    String url = '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
+    String url =
+        '''https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]''';
     final response =
         await http.get(Uri.parse(url), headers: {'Accept-Charset': 'utf-8'});
     if (response.statusCode == 200) {
@@ -1786,7 +1792,8 @@ class _homePageState extends State<homePage>
               assdAttachment: item["passport attachment"] ?? '',
               assdExpiry: item["passport expiry"] ?? '',
               assdNumber: item["passport number"] ?? '',
-              className:  this.classDic[item["Class"]]?? '4 04notfound' ,  //item["Class"] ?? '',
+              className: item["Class"].toString(),
+              //item["Class"] ?? '',
               company: this.companyDic[item["company"]] ?? '',
               course: item["course"] ?? '',
               courseType: item["course-type"] ?? '',
@@ -1831,72 +1838,74 @@ class _homePageState extends State<homePage>
               id: item['_id'] ?? '',
               note: item['note'] ?? ''))
           .toList();
-      if(data['remaining']!=0){
-        String url2 = 'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
-        final remainingDataResponse =
-        await http.get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
-        final dynamic dataRe = json.decode(remainingDataResponse.body)["response"];
-             records2 = dataRe["results"]
+      if (data['remaining'] != 0) {
+        String url2 =
+            'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "New" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
+        final remainingDataResponse = await http
+            .get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
+        final dynamic dataRe =
+            json.decode(remainingDataResponse.body)["response"];
+        records2 = dataRe["results"]
             .map((item) => Record(
-            reschedule: item["xxx"] ?? '',
-            modifiedDate: item["Modified Date"] ?? '',
-            createdDate: item["Created Date"] ?? '',
-            createdBy: item["Created By"] ?? '',
-            assdAttachment: item["passport attachment"] ?? '',
-            assdExpiry: item["passport expiry"] ?? '',
-            assdNumber: item["passport number"] ?? '',
-            className:  this.classDic[item["Class"]]?? '4 04notfound' ,  //item["Class"] ?? '',
-            company: this.companyDic[item["company"]] ?? '',
-            course: item["course"] ?? '',
-            courseType: item["course-type"] ?? '',
-            dob: item["dob"] ?? '',
-            education: item["education"] ?? '',
-            eidBackAttachment: item["eid back attachment"] ?? '',
-            eidExpiry: item["eid expiry"] ?? '',
-            eidFrontAttachment: item["eid front attachment"] ?? '',
-            eidNumber: item["eid number"] ?? '',
-            empid: item["empid"] ?? '',
-            experienceInUae: item["experience in uae"] ?? '',
-            experienceOutUae: item["experience out uae"] ?? '',
-            gender: item["gender"] ?? '',
-            height: item["height"] ?? '',
-            language: item["language"] ?? '',
-            licenseFor: item["license for"] ?? '',
-            medicalReportAttachment: item["medical report attachment"] ?? '',
-            nameAr: item["name ar"] ?? '',
-            nameEn: item["name en"] ?? '',
-            nationalityAr: item["nationality ar"] ?? '',
-            nationality: item["nationality"] ?? '',
-            nsiAttachment: item["NSI attachment"] ?? '',
-            passportAttachment: item["passport attachment"] ?? '',
-            passportExpiry: item["passport expiry"] ?? '',
-            passportNumber: item["passport number"] ?? '',
-            photo: item["photo"] ?? '',
-            remarks: item["remarks"] ?? '',
-            securityExperience: item["security experience"] ?? '',
-            status: 'Pass',
-            trainee: item["Trainee"] ?? '',
-            uid: item["uid"] ?? '',
-            visaAttachment: item["visa attachment"] ?? '',
-            weight: item["weight"] ?? '',
-            returnRemarks: item["return remarks"] ?? '',
-            reviewedBy: item["Reviewed By"] ?? '',
-            completeDate: item["complete date"] ?? '',
-            isPaid: item["isPaid"] ?? false,
-            paymentVar: item["paymentVar"] ?? '',
-            paymentID: item["paymentID"] ?? 0,
-            pmethod: item["pmethod"] ?? '',
-            batch: item["batch"] ?? '',
-            id: item['_id'] ?? '',
-            note: item['note'] ?? ''))
+                reschedule: item["xxx"] ?? '',
+                modifiedDate: item["Modified Date"] ?? '',
+                createdDate: item["Created Date"] ?? '',
+                createdBy: item["Created By"] ?? '',
+                assdAttachment: item["passport attachment"] ?? '',
+                assdExpiry: item["passport expiry"] ?? '',
+                assdNumber: item["passport number"] ?? '',
+                className:item["Class"].toString(),
+                //item["Class"] ?? '',
+                company: this.companyDic[item["company"]] ?? '',
+                course: item["course"] ?? '',
+                courseType: item["course-type"] ?? '',
+                dob: item["dob"] ?? '',
+                education: item["education"] ?? '',
+                eidBackAttachment: item["eid back attachment"] ?? '',
+                eidExpiry: item["eid expiry"] ?? '',
+                eidFrontAttachment: item["eid front attachment"] ?? '',
+                eidNumber: item["eid number"] ?? '',
+                empid: item["empid"] ?? '',
+                experienceInUae: item["experience in uae"] ?? '',
+                experienceOutUae: item["experience out uae"] ?? '',
+                gender: item["gender"] ?? '',
+                height: item["height"] ?? '',
+                language: item["language"] ?? '',
+                licenseFor: item["license for"] ?? '',
+                medicalReportAttachment:
+                    item["medical report attachment"] ?? '',
+                nameAr: item["name ar"] ?? '',
+                nameEn: item["name en"] ?? '',
+                nationalityAr: item["nationality ar"] ?? '',
+                nationality: item["nationality"] ?? '',
+                nsiAttachment: item["NSI attachment"] ?? '',
+                passportAttachment: item["passport attachment"] ?? '',
+                passportExpiry: item["passport expiry"] ?? '',
+                passportNumber: item["passport number"] ?? '',
+                photo: item["photo"] ?? '',
+                remarks: item["remarks"] ?? '',
+                securityExperience: item["security experience"] ?? '',
+                status: 'Pass',
+                trainee: item["Trainee"] ?? '',
+                uid: item["uid"] ?? '',
+                visaAttachment: item["visa attachment"] ?? '',
+                weight: item["weight"] ?? '',
+                returnRemarks: item["return remarks"] ?? '',
+                reviewedBy: item["Reviewed By"] ?? '',
+                completeDate: item["complete date"] ?? '',
+                isPaid: item["isPaid"] ?? false,
+                paymentVar: item["paymentVar"] ?? '',
+                paymentID: item["paymentID"] ?? 0,
+                pmethod: item["pmethod"] ?? '',
+                batch: item["batch"] ?? '',
+                id: item['_id'] ?? '',
+                note: item['note'] ?? ''))
             .toList();
-
       }
       batchNr = records[0].batch.toString() ?? '';
       MyData.data = batchNr;
-      this.newGardsList = records + records2 ;
+      this.newGardsList = records + records2;
       //print(this.newGardsList.length);
-
 
       return records;
     } else {
@@ -1922,7 +1931,7 @@ class _homePageState extends State<homePage>
               assdAttachment: item["passport attachment"] ?? '',
               assdExpiry: item["passport expiry"] ?? '',
               assdNumber: item["passport number"] ?? '',
-              className:  this.classDic[item["Class"]] ?? '',
+              className: item["Class"] ,
               company: this.companyDic[item["company"]] ?? '',
               course: item["course"] ?? '',
               courseType: item["course-type"] ?? '',
@@ -1968,71 +1977,73 @@ class _homePageState extends State<homePage>
               note: item['note'] ?? ''))
           .toList();
 
-      if(data['remaining']!=0){
-        String url2 = 'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
-        final remainingDataResponse =
-        await http.get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
-        final dynamic dataRe = json.decode(remainingDataResponse.body)["response"];
+      if (data['remaining'] != 0) {
+        String url2 =
+            'https://www.tsti.ae/api/1.1/obj/new_request?constraints=[ { "key": "Course-type", "constraint_type": "equals", "value": "Renew" }, { "key": "Batch", "constraint_type": "equals", "value": "${batchNrVar}" }, { "key": "Status", "constraint_type": "equals", "value": "Scheduled" }]&cursor=99&limit=200';
+        final remainingDataResponse = await http
+            .get(Uri.parse(url2), headers: {'Accept-Charset': 'utf-8'});
+        final dynamic dataRe =
+            json.decode(remainingDataResponse.body)["response"];
         records2 = dataRe["results"]
             .map((item) => Record(
-            reschedule: item["xxx"] ?? '',
-            modifiedDate: item["Modified Date"] ?? '',
-            createdDate: item["Created Date"] ?? '',
-            createdBy: item["Created By"] ?? '',
-            assdAttachment: item["passport attachment"] ?? '',
-            assdExpiry: item["passport expiry"] ?? '',
-            assdNumber: item["passport number"] ?? '',
-            className:  this.classDic[item["Class"]]?? '4 04notfound' ,  //item["Class"] ?? '',
-            company: this.companyDic[item["company"]] ?? '',
-            course: item["course"] ?? '',
-            courseType: item["course-type"] ?? '',
-            dob: item["dob"] ?? '',
-            education: item["education"] ?? '',
-            eidBackAttachment: item["eid back attachment"] ?? '',
-            eidExpiry: item["eid expiry"] ?? '',
-            eidFrontAttachment: item["eid front attachment"] ?? '',
-            eidNumber: item["eid number"] ?? '',
-            empid: item["empid"] ?? '',
-            experienceInUae: item["experience in uae"] ?? '',
-            experienceOutUae: item["experience out uae"] ?? '',
-            gender: item["gender"] ?? '',
-            height: item["height"] ?? '',
-            language: item["language"] ?? '',
-            licenseFor: item["license for"] ?? '',
-            medicalReportAttachment: item["medical report attachment"] ?? '',
-            nameAr: item["name ar"] ?? '',
-            nameEn: item["name en"] ?? '',
-            nationalityAr: item["nationality ar"] ?? '',
-            nationality: item["nationality"] ?? '',
-            nsiAttachment: item["NSI attachment"] ?? '',
-            passportAttachment: item["passport attachment"] ?? '',
-            passportExpiry: item["passport expiry"] ?? '',
-            passportNumber: item["passport number"] ?? '',
-            photo: item["photo"] ?? '',
-            remarks: item["remarks"] ?? '',
-            securityExperience: item["security experience"] ?? '',
-            status: 'Pass',
-            trainee: item["Trainee"] ?? '',
-            uid: item["uid"] ?? '',
-            visaAttachment: item["visa attachment"] ?? '',
-            weight: item["weight"] ?? '',
-            returnRemarks: item["return remarks"] ?? '',
-            reviewedBy: item["Reviewed By"] ?? '',
-            completeDate: item["complete date"] ?? '',
-            isPaid: item["isPaid"] ?? false,
-            paymentVar: item["paymentVar"] ?? '',
-            paymentID: item["paymentID"] ?? 0,
-            pmethod: item["pmethod"] ?? '',
-            batch: item["batch"] ?? '',
-            id: item['_id'] ?? '',
-            note: item['note'] ?? ''))
+                reschedule: item["xxx"] ?? '',
+                modifiedDate: item["Modified Date"] ?? '',
+                createdDate: item["Created Date"] ?? '',
+                createdBy: item["Created By"] ?? '',
+                assdAttachment: item["passport attachment"] ?? '',
+                assdExpiry: item["passport expiry"] ?? '',
+                assdNumber: item["passport number"] ?? '',
+                className:  item["Class"].toString(),
+                //item["Class"] ?? '',
+                company: this.companyDic[item["company"]] ?? '',
+                course: item["course"] ?? '',
+                courseType: item["course-type"] ?? '',
+                dob: item["dob"] ?? '',
+                education: item["education"] ?? '',
+                eidBackAttachment: item["eid back attachment"] ?? '',
+                eidExpiry: item["eid expiry"] ?? '',
+                eidFrontAttachment: item["eid front attachment"] ?? '',
+                eidNumber: item["eid number"] ?? '',
+                empid: item["empid"] ?? '',
+                experienceInUae: item["experience in uae"] ?? '',
+                experienceOutUae: item["experience out uae"] ?? '',
+                gender: item["gender"] ?? '',
+                height: item["height"] ?? '',
+                language: item["language"] ?? '',
+                licenseFor: item["license for"] ?? '',
+                medicalReportAttachment:
+                    item["medical report attachment"] ?? '',
+                nameAr: item["name ar"] ?? '',
+                nameEn: item["name en"] ?? '',
+                nationalityAr: item["nationality ar"] ?? '',
+                nationality: item["nationality"] ?? '',
+                nsiAttachment: item["NSI attachment"] ?? '',
+                passportAttachment: item["passport attachment"] ?? '',
+                passportExpiry: item["passport expiry"] ?? '',
+                passportNumber: item["passport number"] ?? '',
+                photo: item["photo"] ?? '',
+                remarks: item["remarks"] ?? '',
+                securityExperience: item["security experience"] ?? '',
+                status: 'Pass',
+                trainee: item["Trainee"] ?? '',
+                uid: item["uid"] ?? '',
+                visaAttachment: item["visa attachment"] ?? '',
+                weight: item["weight"] ?? '',
+                returnRemarks: item["return remarks"] ?? '',
+                reviewedBy: item["Reviewed By"] ?? '',
+                completeDate: item["complete date"] ?? '',
+                isPaid: item["isPaid"] ?? false,
+                paymentVar: item["paymentVar"] ?? '',
+                paymentID: item["paymentID"] ?? 0,
+                pmethod: item["pmethod"] ?? '',
+                batch: item["batch"] ?? '',
+                id: item['_id'] ?? '',
+                note: item['note'] ?? ''))
             .toList();
-
       }
 
-
       this.reNewGardsList = records + records2;
-      print( this.reNewGardsList.length);
+      //print( this.reNewGardsList.length);
       return records;
     } else {
       throw Exception('Failed to load records');
@@ -2057,6 +2068,7 @@ class _homePageState extends State<homePage>
         String redate = data['redate'] ?? 'notFound404';
         data = data['gard'];
 
+
         // Create a Record object from the data
         Record record = Record(
             reschedule: data["zxz"] ?? 'notfund404',
@@ -2066,7 +2078,7 @@ class _homePageState extends State<homePage>
             assdAttachment: data["passport attachment"] ?? '',
             assdExpiry: data["passport expiry"] ?? '',
             assdNumber: data["passport number"] ?? '',
-            className: data["Class"] ?? '',
+            className:data["className"],
             company: data["company"] ?? '',
             course: data["course"] ?? '',
             courseType: data["coursetype"] ?? '',
@@ -2135,13 +2147,9 @@ class _homePageState extends State<homePage>
         List<String> patchNrsList = await getPatchNr();
         MyData.myList = Set<String>.from(patchNrsList).toList();
 
-
-
         // await getExcludedEmployeeIds();
       } else {
         print('already loaded');
-
-
       }
     } catch (e) {
       print(e);
@@ -2149,7 +2157,8 @@ class _homePageState extends State<homePage>
   }
 
   Future<Map<String, String>> fetchOngoingClasses() async {
-    final url = 'https://www.tsti.ae/version-live/api/1.1/obj/classes/?constraints=[ { \"key\": \"Status\", \"constraint_type\": \"equals\", \"value\": \"Ongoing\" }]';
+    final url =
+        'https://www.tsti.ae/version-live/api/1.1/obj/classes/?constraints=[ { \"key\": \"Status\", \"constraint_type\": \"equals\", \"value\": \"Ongoing\" }]';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final jsonData = json.decode(response.body);
@@ -2160,15 +2169,13 @@ class _homePageState extends State<homePage>
         final title = classData['title'];
         classMap[id] = title;
       }
-      this.classDic = classMap ;
+
+      this.classDic = classMap;
       return classMap;
     } else {
-
       throw Exception('Failed to fetch ongoing classes');
     }
   }
-
-
 
   List<dynamic> searchByName(List<dynamic> records, String name) {
     if (name.isEmpty) {
@@ -2264,7 +2271,6 @@ class _homePageState extends State<homePage>
       print('Error adding record: $e');
     }
   }
-
 }
 
 void doNothing(BuildContext context) {}

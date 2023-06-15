@@ -1,22 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SearchBar extends StatefulWidget {
+class SearchBar22 extends StatefulWidget {
   final TextEditingController searchController;
   final VoidCallback onSearch;
   final VoidCallback onClear;
 
-  SearchBar({
+  SearchBar22({
     required this.searchController,
     required this.onSearch,
     required this.onClear,
   });
 
   @override
-  State<SearchBar> createState() => _SearchBarState();
+  State<SearchBar22> createState() => _SearchBar22State();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBar22State extends State<SearchBar22> {
   @override
   Widget build(BuildContext context) {
     return Container(
