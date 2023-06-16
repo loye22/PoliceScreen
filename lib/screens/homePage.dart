@@ -534,7 +534,9 @@ class _homePageState extends State<homePage>
                                                                         b = true;
                                                                       }, () {});
                                                                   if (b) {
+                                                                    this.newGardsList.removeWhere((e) =>e.nameEn == item.nameEn);
                                                                     DateTime
+
                                                                     d =
                                                                     await _selectDate(
                                                                         context);
@@ -683,20 +685,12 @@ class _homePageState extends State<homePage>
                                                                         b = true;
                                                                       }, () {});
                                                                   if (b) {
-                                                                    DateTime
-                                                                    d =
-                                                                    await _selectDate(
-                                                                        context);
-                                                                    String
-                                                                    date =
-                                                                    DateFormat('yyyy-MM-dd')
-                                                                        .format(d);
 
-                                                                    await addRecordToFirebase(
-                                                                        item,
-                                                                        date,
-                                                                        item.note
-                                                                            .toString());
+                                                                    this.newGardsList.removeWhere((e) =>e.nameEn == item.nameEn);
+                                                                    DateTime
+                                                                    d = await _selectDate(context);
+                                                                    String date = DateFormat('yyyy-MM-dd') .format(d);
+                                                                    await addRecordToFirebase(item, date, item.note.toString());
                                                                   }
                                                                 },
                                                                 icon: Icon(
@@ -890,6 +884,7 @@ class _homePageState extends State<homePage>
                                                                         b = true;
                                                                       }, () {});
                                                                   if (b) {
+                                                                    this.reNewGardsList.removeWhere((e) =>e.nameEn == item.nameEn);
                                                                     DateTime
                                                                     d =
                                                                     await _selectDate(
@@ -1038,6 +1033,7 @@ class _homePageState extends State<homePage>
                                                                         b = true;
                                                                       }, () {});
                                                                   if (b) {
+                                                                    this.reNewGardsList.removeWhere((e) =>e.nameEn == item.nameEn);
                                                                     DateTime
                                                                     d =
                                                                     await _selectDate(
