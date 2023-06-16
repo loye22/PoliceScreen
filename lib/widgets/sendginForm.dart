@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:intl/intl.dart';
 import 'package:signature/signature.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tsti_signature/models/MyDialog.dart';
@@ -56,6 +57,7 @@ class _sendginFormState extends State<sendginForm> {
   final TextEditingController rankController2 = TextEditingController();
   final TextEditingController nameController3 = TextEditingController();
   final TextEditingController rankController3 = TextEditingController();
+  String s1 = '';
   String s2 = '';
   String s3 = '';
 
@@ -427,8 +429,7 @@ class _sendginFormState extends State<sendginForm> {
                                       await storageRef
                                           .putData(signatureBytes!);
                                       s2 =
-                                      await storageRef
-                                          .getDownloadURL();
+                                      await storageRef.getDownloadURL();
                                       widget.f2 = false;
 
 
@@ -468,6 +469,7 @@ class _sendginFormState extends State<sendginForm> {
 
 
 
+
                                     }
 
                                   }
@@ -494,6 +496,7 @@ class _sendginFormState extends State<sendginForm> {
                                   final downloadURL =
                                       await storageRef
                                       .getDownloadURL();
+                                   s1 = downloadURL ;
 
                                   // to handle the reshcedual grads
                                   if (widget.tab == 2) {
@@ -667,6 +670,7 @@ class _sendginFormState extends State<sendginForm> {
                                   await batch.commit();
 
 
+                                  print(this.s1);
                                   setState(() {
                                     isLoding = false;
                                   });
@@ -722,461 +726,11 @@ class _sendginFormState extends State<sendginForm> {
                             SizedBox(height: 10),
                         
 
-                            /*SizedBox(
-                              height: space,
-                            ),
-                            widget.counter == 2 || widget.counter == 3
-                                ? Animate(
-                                    effects: [SlideEffect()],
-                                    child: Container(
-                                      width: 500,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Form(
-                                            key: _key,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                SizedBox(
-                                                    //        height: 150,
-                                                    ),
-                                                Container(
-                                                  height: 40,
-                                                  width: 300,
-                                                  child: TextFormField(
-                                                      key: ValueKey('username'),
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                      keyboardType:
-                                                          TextInputType
-                                                              .emailAddress,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        prefixIcon: Icon(
-                                                            Icons.person,
-                                                            color:
-                                                                Colors.white),
-                                                        labelText: 'الاسم',
-                                                        labelStyle: TextStyle(
-                                                            color:
-                                                                Colors.white),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      25.0),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2.0,
-                                                          ),
-                                                        ),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      25.0),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors.white,
-                                                            width: 2.0,
-                                                          ),
-                                                        ),
-                                                        filled: true,
-                                                        fillColor: Colors
-                                                            .grey.shade200
-                                                            .withOpacity(0.45),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      25.0),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Colors.white
-                                                                .withOpacity(
-                                                                    0.7),
-                                                          ),
-                                                        ),
-                                                        contentPadding:
-                                                            EdgeInsets
-                                                                .symmetric(
-                                                                    vertical:
-                                                                        10.0,
-                                                                    horizontal:
-                                                                        16.0),
-                                                      ),
-                                                      onSaved: (val) {
-                                                        if (val != null) {
-                                                          val = val
-                                                              ?.replaceAll(
-                                                                  " ", "")
-                                                              .toString();
-                                                        }
-                                                      },
-                                                      validator: (val) {
-                                                        if (val == null) {
-                                                          return;
-                                                        }
-                                                        //   val = val?.replaceAll(" ", "").toString();
-                                                      }),
-                                                ),
-                                                SizedBox(height: 10),
-                                                Container(
-                                                  height: 40,
-                                                  width: 300,
-                                                  child: TextFormField(
-                                                    key: ValueKey('password'),
-                                                    style: TextStyle(
-                                                        color: Colors.white),
-                                                    obscureText: true,
-                                                    keyboardType: TextInputType
-                                                        .emailAddress,
-                                                    decoration: InputDecoration(
-                                                      prefixIcon: Icon(
-                                                          Icons.password,
-                                                          color: Colors.white),
-                                                      labelText: 'Password',
-                                                      labelStyle: TextStyle(
-                                                          color: Colors.white),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.white,
-                                                          width: 2.0,
-                                                        ),
-                                                      ),
-                                                      enabledBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.white,
-                                                          width: 2.0,
-                                                        ),
-                                                      ),
-                                                      filled: true,
-                                                      fillColor: Colors
-                                                          .grey.shade200
-                                                          .withOpacity(0.45),
-                                                      focusedBorder:
-                                                          OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(25.0),
-                                                        borderSide: BorderSide(
-                                                          color: Colors.white
-                                                              .withOpacity(0.7),
-                                                        ),
-                                                      ),
-                                                      contentPadding:
-                                                          EdgeInsets.symmetric(
-                                                              vertical: 10.0,
-                                                              horizontal: 16.0),
-                                                    ),
-                                                    onSaved: (val) {
-                                                      if (val != null) {
-                                                        //val = val?.replaceAll(" ", "").toString();
-                                                      }
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 15,
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            child: Signature(
-                                              width: 600,
-                                              height: 200,
-                                              controller: _controller2,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox.shrink(),
-                            SizedBox(
-                              height: space,
-                            ),
-                            widget.counter > 2
-                                ? Animate(
-                                    effects: [SlideEffect()],
-                                    child: Container(
-                                      width: 500,
-                                      height: 200,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Signature(
-                                              width: 600,
-                                              height: 200,
-                                              controller: _controller3,
-                                              backgroundColor: Colors.white,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                : SizedBox.shrink(),*/
+
                             SizedBox(
                               height: 30,
                             ),
-                            /*
-                            Container(
-                              child: Row(
-                                children: [
-                                  isLoding
-                                      ? CircularProgressIndicator()
-                                      : Button(
-                                          txt: 'ارسال',
-                                          icon: Icons.subdirectory_arrow_left,
-                                          isSelected: true,
-                                          onPress: () async {
-                                            try {
-                                              // in case the user didnot sigh
-                                              if (_controller.isEmpty) {
-                                                return await showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text('انذار'),
-                                                      content: Text(
-                                                          'يرجي التوقيع بداية '),
-                                                      actions: <Widget>[
-                                                        TextButton(
-                                                          child: Text('قبول'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              }
 
-                                              setState(() {
-                                                isLoding = true;
-                                              });
-                                              // create time stamp and uplooding the signither image
-
-                                              final timestamp = DateTime.now()
-                                                  .toString()
-                                                  .replaceAll(' ', '_');
-                                              final signatureBytes =
-                                                  await _controller
-                                                      .toPngBytes();
-                                              final storageRef = FirebaseStorage
-                                                  .instance
-                                                  .ref()
-                                                  .child('signatures')
-                                                  .child('mySignature' +
-                                                      timestamp +
-                                                      '.png');
-                                              await storageRef
-                                                  .putData(signatureBytes!);
-                                              final downloadURL =
-                                                  await storageRef
-                                                      .getDownloadURL();
-
-                                              // to handle the reshcedual grads
-                                              if (widget.tab == 2) {
-                                                CollectionReference
-                                                    collectionRef =
-                                                    FirebaseFirestore.instance
-                                                        .collection(
-                                                            // this is list of the patch nr where we fetching
-                                                            '46')
-                                                        .doc()
-                                                        .collection(
-                                                            'reSchedual');
-
-                                                // Create a new batch
-                                                WriteBatch batchRE =
-                                                    FirebaseFirestore.instance
-                                                        .batch();
-
-                                                // Iterate over each record in the list
-                                                for (var record in widget.rec) {
-                                                  // Create a new document reference with a unique ID
-                                                  DocumentReference
-                                                      documentRef =
-                                                      collectionRef.doc();
-
-                                                  // Add the record data to the batch
-                                                  batchRE.set(documentRef, {
-                                                    'company':
-                                                        record.company ?? '',
-                                                    'course':
-                                                        record.course ?? '',
-                                                    'coursetype':
-                                                        record.courseType ?? '',
-                                                    'employeeid':
-                                                        record.empid ?? '',
-                                                    'height':
-                                                        record.height ?? '',
-                                                    'name': record.nameEn ?? '',
-                                                    'nationality':
-                                                        record.nationality ??
-                                                            '',
-                                                    'result':
-                                                        record.status ?? '',
-                                                    'signature': downloadURL ??
-                                                        '404notfound',
-                                                    'weight':
-                                                        record.weight ?? '',
-                                                    'note': record.note ?? ''
-                                                  });
-                                                }
-
-                                                // Commit the batch to Firestore
-                                                await batchRE.commit();
-                                                return;
-                                              }
-
-                                              CollectionReference
-                                                  collectionRef =
-                                                  FirebaseFirestore.instance
-                                                      .collection(
-                                                          // this is list of the patch nr where we fetching
-                                                          '46')
-                                                      .doc()
-                                                      .collection(
-                                                          widget.tab == 0
-                                                              ? "new"
-                                                              : "renew");
-
-                                              // Create a new batch
-                                              WriteBatch batch =
-                                                  FirebaseFirestore.instance
-                                                      .batch();
-
-                                              // Iterate over each record in the list
-                                              for (var record in widget.rec) {
-                                                // Create a new document reference with a unique ID
-                                                DocumentReference documentRef =
-                                                    collectionRef.doc();
-
-                                                // Add the record data to the batch
-                                                batch.set(documentRef, {
-                                                  'company':
-                                                      record.company ?? '',
-                                                  'course': record.course ?? '',
-                                                  'coursetype':
-                                                      record.courseType ?? '',
-                                                  'employeeid':
-                                                      record.empid ?? '',
-                                                  'height': record.height ?? '',
-                                                  'name': record.nameEn ?? '',
-                                                  'nationality':
-                                                      record.nationality ?? '',
-                                                  'result': record.status ?? '',
-                                                  'signature': downloadURL ??
-                                                      '404notfound',
-                                                  'weight': record.weight ?? '',
-                                                  'note':
-                                                      record.note ?? 'defalst'
-                                                });
-                                              }
-
-                                              // Commit the batch to Firestore
-                                              await batch.commit();
-
-
-                                              setState(() {
-                                                isLoding = false;
-                                              });
-                                              await showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text('اشعار'),
-                                                      content: Text(
-                                                          'تمت العملية بنجاح'),
-                                                      actions: [
-                                                        TextButton(
-                                                          child: Text('OK'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  });
-                                            } catch (e) {
-                                              print(e);
-                                              await showDialog(
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return AlertDialog(
-                                                      title: Text('Error'),
-                                                      content: Text('$e'),
-                                                      actions: [
-                                                        TextButton(
-                                                          child: Text('OK'),
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  });
-                                            } finally {
-                                              setState(() {
-                                                isLoding = false;
-                                              });
-                                              Navigator.pop(context);
-                                            }
-                                          },
-                                        ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Button(
-                                    txt: 'اضافة شرطي اخر',
-                                    icon: Icons.subdirectory_arrow_left,
-                                    isSelected: true,
-                                    onPress: () {
-                                      if (widget.counter == 3) return;
-                                      widget.counter++;
-                                      setState(() {});
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),*/
                           ],
                         ),
                       ),
@@ -1257,6 +811,12 @@ class _sendginFormState extends State<sendginForm> {
                           )
                         ],
                       ),
+                      IconButton(onPressed: () async {
+
+                        print('start');
+                         await  sendDataToAPI(widget.rec);
+                         print('end');
+                      }, icon: Icon(Icons.add  , size: 50,))
                     ],
                   ),
                 ),
@@ -1385,6 +945,66 @@ class _sendginFormState extends State<sendginForm> {
 
     return [];
   }
+
+
+  Future<void> sendDataToAPI(List<dynamic> recordList) async {
+    // API endpoint URL
+    final url = Uri.parse('https://rest.apitemplate.io/v2/create-pdf?template_id=cc177b238ce1be88');
+
+    // Request headers
+    final headers = {
+      'X-API-KEY': 'd716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp',
+      'Content-Type': 'application/json',
+    };
+
+    // Prepare the request body
+    final requestBody = {
+      'course': 'New Basic Security Guard',
+      'timing': 'Morning,Batch 44',
+      'signature': s1,
+      'signature2': s2,
+      'signature3': s3,
+
+      'date' :DateFormat('ddMMyyyy').format( DateTime.now()).toString() ,
+      'name1' : 'sayaah' ,
+      'rank1' : 'whatrere' ,
+      'name2' : nameController2.text ,
+      'rank2' : rankController2.text ,
+      'name3' : nameController3.text ,
+      'rank3' : rankController3.text ,
+      'students': recordList.map((record) => {
+        'name': record.nameEn,
+        'nationality': record.nationality,
+        'height': record.height,
+        'weight': record.weight,
+        'result': record.status,
+        'company': record.company,
+      }).toList(),
+    };
+
+    // Convert the request body to JSON
+    final requestBodyJson = jsonEncode(requestBody);
+
+    try {
+      // Send the POST request
+      final response = await http.post(url, headers: headers, body: requestBodyJson);
+
+      // Handle the API response
+      if (response.statusCode == 200) {
+        // Request successful
+        final responseData = jsonDecode(response.body);
+        print(responseData);
+        // Handle the response data as needed
+      } else {
+        // Request failed
+        print('Request failed with status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Error occurred
+      print('Error sending request: $error');
+    }
+  }
+
 }
 
 class CircularChart extends StatelessWidget {
@@ -1511,4 +1131,7 @@ Widget getColorExplanation() {
       ),
     ],
   );
+
+
+
 }
