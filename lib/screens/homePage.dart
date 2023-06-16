@@ -1895,7 +1895,7 @@ class _homePageState extends State<homePage>
       batchNr = records[0].batch.toString() ?? '';
       MyData.data = batchNr;
       this.newGardsList = records + records2 ;
-      //print(this.newGardsList.length);
+      print(this.newGardsList.length.toString() + " newGardsList");
 
 
       return records;
@@ -2032,7 +2032,7 @@ class _homePageState extends State<homePage>
 
 
       this.reNewGardsList = records + records2;
-      print( this.reNewGardsList.length);
+      print( this.reNewGardsList.length.toString() + " RrenewGardsList");
       return records;
     } else {
       throw Exception('Failed to load records');
@@ -2066,7 +2066,7 @@ class _homePageState extends State<homePage>
             assdAttachment: data["passport attachment"] ?? '',
             assdExpiry: data["passport expiry"] ?? '',
             assdNumber: data["passport number"] ?? '',
-            className: data["Class"] ??'not found',
+            className: data["className"] ??'not found',
             company: data["company"] ?? '',
             course: data["course"] ?? '',
             courseType: data["coursetype"] ?? '',
