@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:intl/intl.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 import 'package:signature/signature.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:tsti_signature/models/MyDialog.dart';
@@ -589,6 +591,11 @@ class _sendginFormState extends State<sendginForm> {
 
                                     // Commit the batch to Firestore
                                     await batchRE.commit();
+                                    /////
+                                    String? url =  await  sendDataToAPI(widget.rec);
+                                    if(url == null)
+                                      throw Exception('Something went wrong with API ingtration plz renew you plan!');
+                                    await sendEmail('ayman.khr@tsti.ae' , url);
 
                                     // delete the reschdeul collection after this
 
@@ -668,6 +675,10 @@ class _sendginFormState extends State<sendginForm> {
 
                                   // Commit the batch to Firestore
                                   await batch.commit();
+                                  String? url2 =  await  sendDataToAPI(widget.rec);
+                                  if(url2 == null)
+                                    throw Exception('Something went wrong with API ingtration plz renew you plan!');
+                                  await sendEmail('ayman.khr@tsti.ae' , url2);
 
 
                                   print(this.s1);
@@ -811,12 +822,12 @@ class _sendginFormState extends State<sendginForm> {
                           )
                         ],
                       ),
-                      IconButton(onPressed: () async {
+                      /*IconButton(onPressed: () async {
 
                         print('start');
                          await  sendDataToAPI(widget.rec);
                          print('end');
-                      }, icon: Icon(Icons.add  , size: 50,))
+                      }, icon: Icon(Icons.add  , size: 50,))*/
                     ],
                   ),
                 ),
@@ -851,6 +862,12 @@ class _sendginFormState extends State<sendginForm> {
       },
     );
   }
+
+
+
+
+
+
 
   Future<void> sendRecords(List<dynamic> records, String url) async {
     final token = 'Bearer b0bf5071d23535c6251a9fa6ce2e463f';
@@ -947,13 +964,13 @@ class _sendginFormState extends State<sendginForm> {
   }
 
 
-  Future<void> sendDataToAPI(List<dynamic> recordList) async {
+  Future<String?> sendDataToAPI(List<dynamic> recordList) async {
     // API endpoint URL
-    final url = Uri.parse('https://rest.apitemplate.io/v2/create-pdf?template_id=cc177b238ce1be88');
+    final url = Uri.parse('https://rest.apitemplate.io/v2/create-pdf?template_id=22677b23a84850c2');//   cc177b238ce1be88');
 
     // Request headers
     final headers = {
-      'X-API-KEY': 'd716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp',
+      'X-API-KEY':'e524MTM0NDM6MTA1MDE6WElVbXdlNmdSeGpoWFhFdw=', //'d716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp',
       'Content-Type': 'application/json',
     };
 
@@ -993,17 +1010,45 @@ class _sendginFormState extends State<sendginForm> {
       if (response.statusCode == 200) {
         // Request successful
         final responseData = jsonDecode(response.body);
-        print(responseData);
+        print(responseData['download_url']);
+        return responseData['download_url'];
         // Handle the response data as needed
       } else {
         // Request failed
         print('Request failed with status code: ${response.statusCode}');
+        return'';
       }
     } catch (error) {
       // Error occurred
       print('Error sending request: $error');
     }
   }
+
+  Future<void> sendEmail(String resivedEmail , String url) async {
+    final smtpServer = SmtpServer(
+      'smtp-relay.sendinblue.com',
+      port: 587,
+      username: 'louai.ibrahim@tsti.ae',
+      password: 'QrSxhKOv3m54anMw',
+    );
+
+    final message = Message()
+      ..from = Address('louai.ibrahim@tsti.ae')
+      ..recipients.add(resivedEmail)
+      ..subject = 'Resulats'
+      ..text = 'Dear Sir/Madam,\n\nPlease find the results link attached with this email\n$url \n\nBest regards,\nTatweer Security Training Institute team';
+
+    try {
+      final sendReport = await send(message, smtpServer);
+      print('Email sent successfully');
+      MyDialog.showAlert(context, 'Email sent successfully');
+    } catch (e) {
+      print('Failed to send email: $e');
+      MyDialog.showAlert(context, 'Failed to send email: $e');
+    }
+  }
+
+
 
 }
 

@@ -1696,14 +1696,14 @@ class _homePageState extends State<homePage>
                           ),
                         ),
                       ),
-                      Positioned(
+                     /* Positioned(
                         top: 100,
                         child: IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () async {
                               // Get the screen size and resolution
                             }),
-                      )
+                      )*/
                     ],
                   );
                 });
