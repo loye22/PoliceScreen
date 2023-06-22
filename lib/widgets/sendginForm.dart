@@ -904,7 +904,7 @@ class _sendginFormState extends State<sendginForm> {
 
 
 
-
+// new new new
 
   Future<bool> checkCollectionExists(String batchNumber, String collectionName) async {
     final CollectionReference collectionReference = FirebaseFirestore.instance
