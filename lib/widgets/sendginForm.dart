@@ -595,7 +595,7 @@ class _sendginFormState extends State<sendginForm> {
                                     String? url =  await  sendDataToAPI(widget.rec);
                                     if(url == null)
                                       throw Exception('Something went wrong with API ingtration plz renew you plan!');
-                                    await sendEmail('ayman.khr@tsti.ae' , url);
+                                    await sendEmail(['louai.ibrahim@tsti.ae'] , url);
 
                                     // delete the reschdeul collection after this
 
@@ -678,7 +678,7 @@ class _sendginFormState extends State<sendginForm> {
                                   String? url2 =  await  sendDataToAPI(widget.rec);
                                   if(url2 == null)
                                     throw Exception('Something went wrong with API ingtration plz renew you plan!');
-                                  await sendEmail('ayman.khr@tsti.ae' , url2);
+                                  await sendEmail(['louai.ibrahim@tsti.ae'] , url2);
 
 
                                   print(this.s1);
@@ -1024,28 +1024,35 @@ class _sendginFormState extends State<sendginForm> {
     }
   }
 
-  Future<void> sendEmail(String resivedEmail , String url) async {
-    final smtpServer = SmtpServer(
-      'smtp-relay.sendinblue.com',
-      port: 587,
-      username: 'louai.ibrahim@tsti.ae',
-      password: 'QrSxhKOv3m54anMw',
-    );
+  Future<void> sendEmail(List<String> emails, String fileUrl) async {
+    final apiUrl = 'https://www.tsti.ae/version-test/api/1.1/wf/send-email';
 
-    final message = Message()
-      ..from = Address('louai.ibrahim@tsti.ae')
-      ..recipients.add(resivedEmail)
-      ..subject = 'Resulats'
-      ..text = 'Dear Sir/Madam,\n\nPlease find the results link attached with this email\n$url \n\nBest regards,\nTatweer Security Training Institute team';
+    // JSON payload
+    final payload = jsonEncode({
+      'emails': emails,
+      'subject': 'TEST EMAIL',
+      'body': 'Dear Sie/Madam please find the result link attached in the this email\n ${fileUrl}',
+      'file': fileUrl,
+    });
 
     try {
-      final sendReport = await send(message, smtpServer);
-      print('Email sent successfully');
-      MyDialog.showAlert(context, 'Email sent successfully');
-    } catch (e) {
-      print('Failed to send email: $e');
-      MyDialog.showAlert(context, 'Failed to send email: $e');
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: payload,
+      );
+
+      if (response.statusCode == 200) {
+        print('Email sent successfully!');
+      } else {
+        print('Failed to send email. Status code: ${response.statusCode}');
+      }
+    } catch (error) {
+      print('Error sending email: $error');
     }
+
+
+
   }
 
 

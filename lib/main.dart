@@ -46,8 +46,6 @@ class MyApp extends StatelessWidget {
       ),
 
 
-
-
       routes: {
         homePage.routeName: (ctx) => homePage(),
         sendginForm.routeName: (ctx) => sendginForm(rec: [] , tab: 0 , batchNrVarInSendingForm: ''),
