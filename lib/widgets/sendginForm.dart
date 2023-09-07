@@ -596,6 +596,19 @@ class _sendginFormState extends State<sendginForm> {
                                     if(url == null)
                                       throw Exception('Something went wrong with API ingtration plz renew you plan!');
                                     await sendEmail(['louai.ibrahim@tsti.ae'] , url);
+                                    try{
+                                      //String? x =  await  createPDF(widget.rec,s1);
+                                      print(url+"<<<<<<<<<<<");
+                                      await sendEmail(['louai.ibrahim@tsti.ae'] , url);
+                                      print('url2 $url');
+                                     // print(x);
+                                    }
+                                    catch(e){
+
+                                      print('error  $e');
+                                    }
+
+
 
                                     // delete the reschdeul collection after this
 
@@ -679,6 +692,20 @@ class _sendginFormState extends State<sendginForm> {
                                   if(url2 == null)
                                     throw Exception('Something went wrong with API ingtration plz renew you plan!');
                                   await sendEmail(['louai.ibrahim@tsti.ae'] , url2);
+
+                                  print('xxxx');
+                                  try{
+                                    //String? x =  await  createPDF(widget.rec,s1);
+                                   // print(x.toString() + '<<<<<<<<');
+                                    await sendEmail(['louai.ibrahim@tsti.ae'] , url2);
+                                    print('url2 $url2');
+                                  }
+                                  catch(e){
+
+                                    print('error  $e');
+                                  }
+
+
 
 
                                   print(this.s1);
@@ -970,7 +997,7 @@ class _sendginFormState extends State<sendginForm> {
 
     // Request headers
     final headers = {
-      'X-API-KEY':'e524MTM0NDM6MTA1MDE6WElVbXdlNmdSeGpoWFhFdw=', //'d716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp',
+      'X-API-KEY': 'd716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp', // 'e524MTM0NDM6MTA1MDE6WElVbXdlNmdSeGpoWFhFdw=', //'d716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp',
       'Content-Type': 'application/json',
     };
 
@@ -1054,6 +1081,129 @@ class _sendginFormState extends State<sendginForm> {
 
 
   }
+
+
+
+ /* Future<void> createPDF() async {
+    final url = 'https://rest.apitemplate.io/v2/create-pdf?template_id=cc177b238ce1be88';
+    final apiKey = 'd716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp';
+
+    final headers = {
+      'X-API-KEY': apiKey,
+      'Content-Type': 'application/json',
+    };
+
+    final body = jsonEncode({
+      "course": "New Basic Security Guard",
+      "timing": "Morning,Batch 44",
+      "signature": "signature1",
+      "name1": "name1",
+      "rank1": "rank1",
+      "students": [
+        {
+          "name": "SAMEER NEYYATHOOR ALIBAPPU NEYYATHOOR",
+          "nationality": "Indian",
+          "height": "174",
+          "weight": "74",
+          "result": "Reject",
+          "company": "ORION SECURITY SERVICES L.L.C"
+        },
+        {
+          "name": "SAMEER NEYYATHOOR ALIBAPPU NEYYATHOOR",
+          "nationality": "Indian",
+          "height": "174",
+          "weight": "74",
+          "result": "Reject",
+          "company": "ORION SECURITY SERVICES L.L.C"
+        }
+      ]
+    });
+
+    try {
+      final response = await http.post(Uri.parse(url), headers: headers, body: body);
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final downloadUrl = responseData['download_url'];
+        final transactionRef = responseData['transaction_ref'];
+        final totalPages = responseData['total_pages'];
+        final status = responseData['status'];
+        final templateId = responseData['template_id'];
+
+        print('Download URL: $downloadUrl');
+        print('Transaction Reference: $transactionRef');
+        print('Total Pages: $totalPages');
+        print('Status: $status');
+        print('Template ID: $templateId');
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+*/
+
+  Future<String> createPDF(List<dynamic> records ,String s1) async {
+    final url = 'https://rest.apitemplate.io/v2/create-pdf?template_id=cc177b238ce1be88';
+    final apiKey = 'd716MTI4ODg6OTk0NDpkNWRGOFdzTXNVOHFrWGp';
+
+    final headers = {
+      'X-API-KEY': apiKey,
+      'Content-Type': 'application/json',
+    };
+
+    final students = records.map((record) {
+      return {
+        "name": record.nameEn,
+        "nationality": record.nationality,
+        "height": record.height,
+        "weight": record.weight,
+        "result": record.status,
+        "company": record.company,
+      };
+    }).toList();
+
+    /*
+    *
+    *  'name1' : 'sayaah' ,
+      'rank1' : 'whatrere' ,
+      'name2' : nameController2.text ,
+      'rank2' : rankController2.text ,
+      'name3' : nameController3.text ,
+      'rank3' : rankController3.text ,
+    * */
+    final body = jsonEncode({
+      "course": 'records.first.course', // Assuming the course is the same for all records
+      "timing": 'records.first.batch', // Assuming the batch is the same for all records
+      "signature": s1,
+      "name1":'Mr Sayaah' ?? 'notfound', // Assuming the name1 is the same for all records
+      'rank1' : 'R1' ,
+      'name2' : nameController2.text ,
+      'rank2' : rankController2.text ,
+      'name3' : nameController3.text ,
+      'rank3' : rankController3.text ,
+      "students": students,
+
+    });
+
+    try {
+      final response = await http.post(Uri.parse(url), headers: headers, body: body);
+      if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final downloadUrl = responseData['download_url'] as String;
+
+        return downloadUrl;
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+
+    return '';
+  }
+
+
 
 
 

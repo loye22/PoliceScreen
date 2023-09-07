@@ -218,6 +218,7 @@ class _homePageState extends State<homePage>
   late DismissDirection d;
   final _key = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1675,11 +1676,12 @@ class _homePageState extends State<homePage>
                                           batchNrVar = newValue!;
                                         });
                                       },
-                                      items: MyData.myList
+                                      items:MyData.myList
                                           .map((e) => DropdownMenuItem<String>(
-                                        value: e.toString(),
+                                        value: e.toString() ?? 'x',
                                         child: Text(e.toString()),
-                                      ))
+                                      )
+                                      ,)
                                           .toList(),
                                       style: TextStyle(
                                         color: Colors.black,
@@ -2126,6 +2128,11 @@ class _homePageState extends State<homePage>
         this.companyDic = await getCompanyData() as Map<String, dynamic>;
         List<String> patchNrsList = await getPatchNr();
         MyData.myList = Set<String>.from(patchNrsList).toList();
+        if (!MyData.myList.contains(this.batchNrVar)){
+          this.batchNrVar = MyData.myList.first;
+        }
+
+      //  print(MyData.myList);
         await fetchOngoingClasses();
         await fetchRecordsNewGards(batchNrVar);
         await fetchRecordsReNewGards(batchNrVar);
