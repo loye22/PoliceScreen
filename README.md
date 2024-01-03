@@ -19,6 +19,8 @@ Key Features:
 * Multi-User Support: The app supports up to three police officers as signatories, allowing for collaborative evaluations and ensuring the involvement of multiple stakeholders in the decision-making process.
 
 * Notes and Rescheduling: The app allows officers to add notes to individual guard profiles, providing a convenient way to document important observations, remarks, or additional information. Additionally, officers have the ability to reschedule guards to a specific date, ensuring better organization and follow-up for future evaluations.
+* 
+![Frame 6 (2)](https://github.com/loye22/PoliceScreen/assets/65570842/54bb7bc0-6e56-4096-a1c0-53b482e22e91)
 
 ![01](https://github.com/loye22/PoliceScreen/assets/65570842/2f487f71-4697-423f-be12-36fcc65002a1)
 ![02](https://github.com/loye22/PoliceScreen/assets/65570842/b4028b4f-bc89-44c8-9f5c-7faf26e30f46)
